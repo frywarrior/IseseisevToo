@@ -62,6 +62,7 @@ while not gameover:
         print("ai")
         gameover = True
         screen.blit(f1_blue, (BposX, RposY + 90))
+        pygame.display.flip()
 
     while gameover:
         clock.tick(60)
