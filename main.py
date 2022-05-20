@@ -48,5 +48,8 @@ while not gameover:
     if BposY >= screenY:
         BposY = -120
 
+    if RposY >= screenY:
+        RposY = -120
+
     # graafika kuvamine ekraanil
     pygame.display.flip()
