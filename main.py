@@ -34,19 +34,13 @@ while not gameover:
     clock.tick(60)
     # mängu sulgemine ristist
     events = pygame.event.get()
-    for i in pygame.event.get():
+    for i in events:
         if i.type == pygame.QUIT:
             quit()
             sys.exit()
 
     # pildi lisamine ekraanile
     screen.blit(bg, (0, 0))
-
-    screen.blit(f1_blue, (BposX, BposY))
-    BposY += BspeedY
-
-    screen.blit(f1_red, (RposX, RposY))
-    RposY += RspeedY
 
     screen.blit(pygame.font.Font(None, 30).render(f"Score: {Score}", True, [255, 255, 255]), [10, 460])
 
@@ -58,14 +52,29 @@ while not gameover:
     if RposY >= screenY:
         RposY = -120
 
-    if RposY <= BposY+90 <= RposY + 90 and RposX == BposX:
+    if RposY <= BposY+90 - BspeedY <= RposY + 90 and RposX == BposX:
         print("ai")
-        gameover = True
-        screen.blit(f1_blue, (BposX, RposY + 90))
+        screen.blit(f1_red, (RposX, RposY))
+        RposY += RspeedY
+        screen.blit(f1_blue, (RposX, RposY - 80))
         pygame.display.flip()
+        gameover = True
+    else:
+        screen.blit(f1_blue, (BposX, BposY))
+        BposY += BspeedY
 
+        screen.blit(f1_red, (RposX, RposY))
+        RposY += RspeedY
     while gameover:
         clock.tick(60)
         screen.fill([135, 206, 235])
+        screen.blit(pygame.font.Font(None, 100).render(f"Score: {Score}", True, [255, 255, 255]), [180, 200])
+        pygame.display.flip()
+
+        events = pygame.event.get()
+        for i in events:
+            if i.type == pygame.QUIT:
+                quit()
+                sys.exit()
     # graafika kuvamine ekraanil
     pygame.display.flip()
