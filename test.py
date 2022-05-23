@@ -1,4 +1,4 @@
-import pygame, sys, random
+import pygame, sys, random, time
 
 pygame.init()
 
@@ -43,7 +43,6 @@ while not gameover:
             quit()
             sys.exit()
 
-    # pildi lisamine ekraanile
 
     # Tausta liikumine ja skoor
     Upos -= BspeedY
@@ -59,28 +58,50 @@ while not gameover:
     screen.blit(pygame.font.Font(None, 30).render(f"Score: {Score}", True, [255, 255, 255]), [10, 460])
     #
 
-    # Sinise auto liikumine
-    screen.blit(f1_blue, (BposX, BposY))
-
-    for event in events:
-        if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_LEFT and BposX != 180:
-                BposX -= 120
-            if event.key == pygame.K_RIGHT and BposX != 420:
-                BposX += 120
 
 
-    ##
+    # hit dectection
+    if RposY <= BposY + 90 and BposY <= RposY + 90 and RposX == BposX:
+        print("ai")
+        screen.blit(f1_red, (RposX, RposY))
+        screen.blit(f1_blue, (BposX, BposY))
+        pygame.display.flip()
+        time.sleep(3)
+        gameover = True
+    else:
+        # Sinise auto liikumine
+        screen.blit(f1_blue, (BposX, BposY))
 
-    # Punase auto liikumine
-    screen.blit(f1_red, (RposX, RposY))
-    RposY += RspeedY
+        for event in events:
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_LEFT and BposX != 180:
+                    BposX -= 120
+                if event.key == pygame.K_RIGHT and BposX != 420:
+                    BposX += 120
 
-    if RposY + 90 <= 0:
-        RposY = 600
-        RposX = random.choice([420, 300, 180])
-        Score += 1
+        ##
+
+        # Punase auto liikumine
+        screen.blit(f1_red, (RposX, RposY))
+        RposY += RspeedY
+
+        if RposY + 90 <= 0:
+            RposY = 600
+            RposX = random.choice([420, 300, 180])
+            RspeedY = -random.randint(3, 15)
+            Score += 1
+        #
     #
+    while gameover:
+        clock.tick(60)
+        screen.fill([135, 206, 235])
+        screen.blit(pygame.font.Font(None, 100).render(f"Score: {Score}", True, [255, 255, 255]), [180, 200])
+        pygame.display.flip()
 
+        events = pygame.event.get()
+        for i in events:
+            if i.type == pygame.QUIT:
+                quit()
+                sys.exit()
     # graafika kuvamine ekraanil
     pygame.display.flip()
