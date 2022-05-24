@@ -46,7 +46,7 @@ while not gameover:
 
     if 0 > BallposX or BallposX > screenX - 20:
         BallspeedX = -BallspeedX
-    #
+    # hit detection
     if PadposY <= BallposY + 20 and BallposY <= PadposY + 20:
         if PadposX <= BallposX + 20 and BallposX <= PadposX + 120:
             if BallspeedY > 0:
