@@ -1,5 +1,6 @@
-import pygame, sys
+import pygame, sys, time
 
+pygame.init()
 
 # ekraani seaded
 screenX = 640
@@ -8,7 +9,7 @@ screen = pygame.display.set_mode([screenX, screenY])
 pygame.display.set_caption("Ping Pong")
 clock = pygame.time.Clock()
 Score = 0
-
+ind = 0
 
 ball = pygame.image.load("Img/ball.png")
 
@@ -22,7 +23,6 @@ BallspeedX = 5
 PadposX, PadposY = 340, 320
 PadspeedX = 3
 
-
 gameover = False
 while not gameover:
     # fps
@@ -35,6 +35,17 @@ while not gameover:
             sys.exit()
 
     screen.fill([149, 203, 255])
+
+    #
+    PadposX += PadspeedX
+
+    screen.blit(pad, (PadposX, PadposY))
+
+    if 0 > PadposX or PadposX > screenX - 120:
+        PadspeedX = -PadspeedX
+    #
+
+    screen.blit(pygame.font.Font(None, 30).render(f"Score: {Score}", True, [255, 255, 255]), [10, 460])
 
     #
     BallposY += BallspeedY
@@ -51,16 +62,12 @@ while not gameover:
         if PadposX <= BallposX + 20 and BallposX <= PadposX + 120:
             if BallspeedY > 0:
                 BallspeedY = -BallspeedY
+    if BallposY + 20 == screenY:
+        if ind == 1:
+            Score -= 1
+            ind = 0
+        else:
+            ind = 1
 
-
-    #
-    PadposX += PadspeedX
-
-    screen.blit(pad, (PadposX, PadposY))
-
-    if 0 > PadposX or PadposX > screenX - 120:
-        PadspeedX = -PadspeedX
-    #
 
     pygame.display.flip()
-

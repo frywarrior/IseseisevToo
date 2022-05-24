@@ -1,5 +1,7 @@
 import pygame, sys, random, time
 
+pygame.init()
+
 # ekraani seaded
 screenX = 640
 screenY = 480
@@ -12,12 +14,12 @@ Upos = 0
 #
 
 # graafika laadimine
-bg = pygame.image.load("Ralli/img/bg_rally.jpg")
+bg = pygame.image.load("img/bg_rally.jpg")
 
-f1_blue = pygame.image.load("Ralli/img/f1_blue.png")
+f1_blue = pygame.image.load("img/f1_blue.png")
 f1_blue = pygame.transform.rotate(f1_blue, 180)
 
-f1_red = pygame.image.load("Ralli/img/f1_red.png")
+f1_red = pygame.image.load("img/f1_red.png")
 f1_red = pygame.transform.rotate(f1_red, 180)
 #
 
