@@ -1,7 +1,5 @@
 import pygame, sys, random, time
 
-pygame.init()
-
 # ekraani seaded
 screenX = 640
 screenY = 480
