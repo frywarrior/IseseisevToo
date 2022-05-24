@@ -15,12 +15,12 @@ Upos = 0
 #
 
 # graafika laadimine
-bg = pygame.image.load("img/bg_rally.jpg")
+bg = pygame.image.load("Ralli/img/bg_rally.jpg")
 
-f1_blue = pygame.image.load("img/f1_blue.png")
+f1_blue = pygame.image.load("Ralli/img/f1_blue.png")
 f1_blue = pygame.transform.rotate(f1_blue, 180)
 
-f1_red = pygame.image.load("img/f1_red.png")
+f1_red = pygame.image.load("Ralli/img/f1_red.png")
 f1_red = pygame.transform.rotate(f1_red, 180)
 #
 
@@ -95,7 +95,8 @@ while not gameover:
     while gameover:
         clock.tick(60)
         screen.fill([135, 206, 235])
-        screen.blit(pygame.font.Font(None, 100).render(f"Score: {Score}", True, [255, 255, 255]), [180, 200])
+        screen.blit(pygame.font.Font(None, 100).render(f"Gameover", True, [255, 255, 255]), [150, 100])
+        screen.blit(pygame.font.Font(None, 50).render(f"Your total score: {Score}", True, [255, 255, 255]), [180, 200])
         pygame.display.flip()
 
         events = pygame.event.get()
