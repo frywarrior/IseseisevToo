@@ -42,6 +42,7 @@ while not gameover:
             quit()
             sys.exit()
 
+
     # Tausta liikumine ja skoor
     Upos -= BspeedY
     Dpos -= BspeedY
