@@ -82,13 +82,24 @@ while not gameover:
 
     # kui pall puudutab ekraani alust
     if BallposY + 20 == screenY:
-        if ind == 1:
-            Score -= 1
-            ind = 0
-        else:
-            ind = 1
+        gameover = True
     #
 
     # uuendab ekraani
     pygame.display.flip()
     #
+
+    # Kui mäng on läbi
+    while gameover:
+        clock.tick(60)
+        screen.fill([135, 206, 235])
+        screen.blit(pygame.font.Font(None, 100).render(f"Gameover", True, [255, 255, 255]), [150, 100])
+        screen.blit(pygame.font.Font(None, 50).render(f"Your total score: {Score}", True, [255, 255, 255]), [180, 200])
+        pygame.display.flip()
+
+        # mängu sulgemine ristist
+        events = pygame.event.get()
+        for i in events:
+            if i.type == pygame.QUIT:
+                quit()
+                sys.exit()
