@@ -1,4 +1,7 @@
-import pygame, sys, random, time
+import pygame
+import random
+import sys
+import time
 
 pygame.init()
 
@@ -8,9 +11,6 @@ screenY = 480
 screen = pygame.display.set_mode([screenX, screenY])
 pygame.display.set_caption("Animeerimine")
 clock = pygame.time.Clock()
-Score = 0
-Dpos = 480
-Upos = 0
 #
 
 # graafika laadimine
@@ -31,6 +31,12 @@ RposX, RposY = 300, 390
 RspeedY = -2
 #
 
+# muud muutujad
+Score = 0
+Dpos = 480
+Upos = 0
+#
+
 gameover = False
 while not gameover:
     # fps
@@ -41,7 +47,6 @@ while not gameover:
         if i.type == pygame.QUIT:
             quit()
             sys.exit()
-
 
     # Tausta liikumine ja skoor
     Upos -= BspeedY
@@ -57,7 +62,7 @@ while not gameover:
     screen.blit(pygame.font.Font(None, 30).render(f"Score: {Score}", True, [255, 255, 255]), [10, 460])
     #
 
-    # hit dectection
+    # Kas autod puutuvad üksteist
     if RposY <= BposY + 90 and BposY <= RposY + 90 and RposX == BposX:
         print("ai")
         screen.blit(f1_red, (RposX, RposY))
@@ -65,6 +70,7 @@ while not gameover:
         pygame.display.flip()
         time.sleep(3)
         gameover = True
+    #
     else:
         # Sinise auto liikumine
         screen.blit(f1_blue, (BposX, BposY))
@@ -76,7 +82,7 @@ while not gameover:
                 if event.key == pygame.K_RIGHT and BposX != 420:
                     BposX += 120
 
-        ##
+        #
 
         # Punase auto liikumine
         screen.blit(f1_red, (RposX, RposY))
@@ -88,7 +94,8 @@ while not gameover:
             RspeedY = -random.randint(3, 15)
             Score += 1
         #
-    #
+
+    # Kui mäng on läbi
     while gameover:
         clock.tick(60)
         screen.fill([135, 206, 235])
@@ -96,6 +103,7 @@ while not gameover:
         screen.blit(pygame.font.Font(None, 50).render(f"Your total score: {Score}", True, [255, 255, 255]), [180, 200])
         pygame.display.flip()
 
+        # mängu sulgemine ristist
         events = pygame.event.get()
         for i in events:
             if i.type == pygame.QUIT:
