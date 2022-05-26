@@ -20,16 +20,28 @@ pad = pygame.transform.scale(pad, [120, 20])
 
 # kiirus ja positsioon
 BallposX, BallposY = 300, 150
-BallspeedY = 5
-BallspeedX = 5
+BallspeedY = 10
+BallspeedX = 10
 
 PadposX, PadposY = 340, 320
-PadspeedX = 5
+PadspeedX = 10
 #
 
 # muud muutujad
 Score = 0
 ind = 0
+#
+
+# laadib muusika
+
+pygame.mixer.music.set_volume(0.2)
+
+pygame.mixer.music.load('Sound/taust.mp3')
+pygame.mixer.music.play(-1)
+
+boing = pygame.mixer.Sound('Sound/boing.mp3')
+
+death = pygame.mixer.Sound('Sound/death.mp3')
 #
 
 gameover = False
@@ -76,6 +88,7 @@ while not gameover:
     if PadposY <= BallposY + 20 and BallposY <= PadposY + 20:
         if PadposX <= BallposX + 20 and BallposX <= PadposX + 120:
             if BallspeedY > 0:
+                pygame.mixer.Sound.play(boing)
                 BallspeedY = -BallspeedY
                 Score += 1
     #
@@ -83,6 +96,8 @@ while not gameover:
     # kui pall puudutab ekraani alust
     if BallposY + 20 == screenY:
         gameover = True
+        pygame.mixer.music.stop()
+        pygame.mixer.Sound.play(death)
     #
 
     # uuendab ekraani
@@ -91,7 +106,7 @@ while not gameover:
 
     # Kui mäng on läbi
     while gameover:
-        clock.tick(60)
+        clock.tick(120)
         screen.fill([135, 206, 235])
         screen.blit(pygame.font.Font(None, 100).render(f"Gameover", True, [255, 255, 255]), [150, 100])
         screen.blit(pygame.font.Font(None, 50).render(f"Your total score: {Score}", True, [255, 255, 255]), [180, 200])
