@@ -20,11 +20,11 @@ pad = pygame.transform.scale(pad, [120, 20])
 
 # kiirus ja positsioon
 BallposX, BallposY = 300, 150
-BallspeedY = 10
-BallspeedX = 10
+BallspeedY = 5
+BallspeedX = 5
 
 PadposX, PadposY = 340, 320
-PadspeedX = 10
+PadspeedX = 5
 #
 
 # muud muutujad
