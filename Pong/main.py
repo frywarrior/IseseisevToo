@@ -68,12 +68,12 @@ while not gameover:
         if PadposX <= BallposX + 20 and BallposX <= PadposX + 120:
             if BallspeedY > 0:
 
-                BallspeedX, BallspeedY = random.randint(0, 10), random.randint(1, 10)
+                # BallspeedX, BallspeedY = random.randint(0, 10), random.randint(1, 10)
 
                 BallspeedY = -BallspeedY
                 Score += 1
 
-    if BallposY + 20 >= screenY:
+    if BallposY + 20 == screenY:
         if ind == 1:
             Score -= 1
             ind = 0
