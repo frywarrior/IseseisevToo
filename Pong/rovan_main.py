@@ -15,6 +15,8 @@ screen.fill(lBlue)
 surf = pygame.Surface((200, 200))
 pygame.draw.circle(surf, lBlue, (140, 100), 100)
 
+Score = 0
+
 clock = pygame.time.Clock()
 posX, posY = 0, 0
 posX2, posY2 = 245, 300
@@ -55,7 +57,9 @@ while not gameover:
 
     if player.colliderect(alus) and speedY > 0:
         speedY = -speedY
-        print("hit")
+        Score += 1
+
+    screen.blit(pygame.font.Font(None, 30).render(f"Score: {Score}", True, [255, 255, 255]), [10, 10])
 
     # alus
     alus = pygame.Rect(posX2, posY2, 120, 20)
