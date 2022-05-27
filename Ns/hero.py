@@ -12,7 +12,7 @@ class Hero:
         self.sc_y = screenpos[1]
         self.speed = 3
 
-    CDC_Time = 5
+    CDC_Time = 4
     CDC = 0
     heroR = ((16, 0, 16, 16), (0, 0, 16, 16), (16, 0, 16, 16), (32, 0, 16, 16))
     heroRC = 0
