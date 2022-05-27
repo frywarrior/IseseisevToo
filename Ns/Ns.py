@@ -7,14 +7,15 @@ pygame.init()
 screenX = 640
 screenY = 480
 
-
 window = pygame.display.set_mode([screenX, screenY])
 w = pygame.Surface([160, 144])
+
 
 def draw():
     frame = pygame.transform.scale(w, (screenX, screenY))
     window.blit(frame, frame.get_rect())
     pygame.display.flip()
+
 
 pygame.display.set_caption("Animeerimine")
 clock = pygame.time.Clock()
@@ -22,6 +23,7 @@ clock = pygame.time.Clock()
 
 # graafika laadimine
 bg = pygame.image.load("img/Veiled_Village.png")
+hero = pygame.image.load("img/Hero_all.png")
 
 #
 
@@ -37,8 +39,6 @@ while not gameover:
             sys.exit()
 
     w.blit(bg, (0, 0))
-
-
+    w.blit(hero, (0, 0), (16, 48, 16, 16))
 
     draw()
-
