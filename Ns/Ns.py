@@ -37,5 +37,8 @@ while not gameover:
             sys.exit()
 
     w.blit(bg, (0, 0))
+
+
+
     draw()
 
