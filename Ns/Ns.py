@@ -1,6 +1,7 @@
 # Franco Kikkas IS21, Lis ns kuna igav
 import pygame
 import sys
+from hero import Hero
 
 pygame.init()
 
@@ -40,6 +41,6 @@ while not gameover:
             sys.exit()
 
     w.blit(bg, (0, 0))
-    w.blit(hero, (0, 0), (16, 48, 16, 16))
+    Hero.lookS()
 
     draw()
