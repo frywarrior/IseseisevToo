@@ -1,3 +1,4 @@
+# Franco Kikkas IS21, Lis ns kuna igav
 import pygame
 import sys
 
@@ -17,7 +18,7 @@ def draw():
     pygame.display.flip()
 
 
-pygame.display.set_caption("Animeerimine")
+pygame.display.set_caption("Game_Test")
 clock = pygame.time.Clock()
 #
 
