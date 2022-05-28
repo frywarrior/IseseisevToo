@@ -134,7 +134,6 @@ class Hero:
         #
         self.display.blit(self.bg, (self.sc_x, self.sc_y))
 
-
     def update(self):
         self.display.blit(self.bg, (self.sc_x, self.sc_y))
         Hero.CDC = 0
