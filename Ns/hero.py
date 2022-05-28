@@ -140,3 +140,21 @@ class Hero:
 
     def dispos(self):
         return self.sc_x, self.sc_y
+
+    def moving(self):
+        keys = pygame.key.get_pressed()
+        if keys[pygame.K_DOWN]:
+            self.move('S')
+            self.look('S')
+        elif keys[pygame.K_UP]:
+            self.move('W')
+            self.look('W')
+        elif keys[pygame.K_LEFT]:
+            self.move('A')
+            self.look('A')
+        elif keys[pygame.K_RIGHT]:
+            self.move('D')
+            self.look('D')
+        else:
+            self.update()
+            self.stand()

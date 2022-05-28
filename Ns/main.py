@@ -51,21 +51,6 @@ while not gameover:
 
             print(scaled_pos)
 
-    keys = pygame.key.get_pressed()
-    if keys[pygame.K_DOWN]:
-        hero.move('S')
-        hero.look('S')
-    elif keys[pygame.K_UP]:
-        hero.move('W')
-        hero.look('W')
-    elif keys[pygame.K_LEFT]:
-        hero.move('A')
-        hero.look('A')
-    elif keys[pygame.K_RIGHT]:
-        hero.move('D')
-        hero.look('D')
-    else:
-        hero.update()
-        hero.stand()
+    hero.moving()
 
     draw()
