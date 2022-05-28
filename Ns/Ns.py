@@ -27,8 +27,7 @@ clock = pygame.time.Clock()
 #
 
 # graafika laadimine
-bg = pygame.image.load("img/Veiled_Village.png")
-hero = Hero(screen, (80, 72), (screenPosX,screenPosY))
+hero = Hero(screen, (72, 72), (screenPosX,screenPosY))
 
 #
 

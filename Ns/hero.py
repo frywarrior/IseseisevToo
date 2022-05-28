@@ -4,12 +4,13 @@ import pygame
 class Hero:
     def __init__(self, display, location, screenpos):
         self.heroPNG = pygame.image.load("img/Hero_all.png")
-        self.bg = pygame.image.load("img/Veiled_Village.png")
+        self.bg = pygame.image.load("img/map.png")
         self.display = display
         self.x = location[0]
         self.y = location[1]
         self.sc_x = screenpos[0]
         self.sc_y = screenpos[1]
+        self.rect = pygame.Rect(self.x, self.y, 16, 16)
         self.speed = 3
 
     CDC_Time = 4
@@ -28,21 +29,21 @@ class Hero:
 
     def stand(self):
         if Hero.heroLoc == 0:
-            self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroD[0])
+            self.display.blit(self.heroPNG, self.rect, Hero.heroD[0])
         elif Hero.heroLoc == 1:
-            self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroU[0])
+            self.display.blit(self.heroPNG, self.rect, Hero.heroU[0])
         elif Hero.heroLoc == 2:
-            self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroL[0])
+            self.display.blit(self.heroPNG, self.rect, Hero.heroL[0])
         elif Hero.heroLoc == 3:
-            self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroR[0])
+            self.display.blit(self.heroPNG, self.rect, Hero.heroR[0])
 
     def look(self, direction):
         if direction == 'S':
             Hero.heroLoc = 0
             if Hero.heroDC == 0:
-                self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroD[3])
+                self.display.blit(self.heroPNG, self.rect, Hero.heroD[3])
             elif Hero.heroDC == 1:
-                self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroD[1])
+                self.display.blit(self.heroPNG, self.rect, Hero.heroD[1])
 
             Hero.CDC += 1
 
@@ -57,9 +58,9 @@ class Hero:
         elif direction == 'W':
             Hero.heroLoc = 1
             if Hero.heroUC == 0:
-                self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroU[3])
+                self.display.blit(self.heroPNG, self.rect, Hero.heroU[3])
             elif Hero.heroUC == 1:
-                self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroU[1])
+                self.display.blit(self.heroPNG, self.rect, Hero.heroU[1])
 
             Hero.CDC += 1
 
@@ -73,9 +74,9 @@ class Hero:
         elif direction == 'A':
             Hero.heroLoc = 2
             if Hero.heroLC == 0:
-                self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroL[3])
+                self.display.blit(self.heroPNG, self.rect, Hero.heroL[3])
             elif Hero.heroLC == 1:
-                self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroL[1])
+                self.display.blit(self.heroPNG, self.rect, Hero.heroL[1])
 
             Hero.CDC += 1
 
@@ -89,9 +90,9 @@ class Hero:
         elif direction == 'D':
             Hero.heroLoc = 3
             if Hero.heroRC == 0:
-                self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroR[3])
+                self.display.blit(self.heroPNG, self.rect, Hero.heroR[3])
             elif Hero.heroRC == 1:
-                self.display.blit(self.heroPNG, (self.x, self.y), Hero.heroR[1])
+                self.display.blit(self.heroPNG, self.rect, Hero.heroR[1])
 
             Hero.CDC += 1
 
