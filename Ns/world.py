@@ -108,7 +108,7 @@ class Hero:
                 Hero.CDC = 0
 
     def move(self, direction):
-        if direction == 'S' and self.sc_y > -576 and self.rect.y == 66:
+        if direction == 'S' and self.sc_y > -576 and self.rect.y == 66: # map height -144 ehk dummy surfaci korgus
             self.sc_y -= self.speed
             self.display.blit(self.bg, (self.sc_x, self.sc_y))
         elif direction == 'S' and self.sc_y <= -576 or direction == 'S' and self.rect.y < 66:
@@ -116,21 +116,21 @@ class Hero:
 
         #
 
-        if direction == 'W' and self.sc_y < -1 and self.rect.y == 66:
+        if direction == 'W' and self.sc_y < -1 and self.rect.y == 66: # koigil sama
             self.sc_y += self.speed
             self.display.blit(self.bg, (self.sc_x, self.sc_y))
         elif direction == 'W' and self.sc_y >= -1 or direction == 'W' and self.rect.y > 66:
             self.rect.move_ip(0, -self.speed)
         #
 
-        if direction == 'A' and self.sc_x < -2 and self.rect.x == 72:
+        if direction == 'A' and self.sc_x < -2 and self.rect.x == 72: # koigil sama
             self.sc_x += self.speed
             self.display.blit(self.bg, (self.sc_x, self.sc_y))
         elif direction == 'A' and self.sc_x >= -2 or direction == 'A' and self.rect.x > 72:
             self.rect.move_ip(-self.speed, 0)
         #
 
-        if direction == 'D' and self.sc_x > -560 and self.rect.x == 72:
+        if direction == 'D' and self.sc_x > -560 and self.rect.x == 72: # map width - 160 ehk dummy surfaci laius
             self.sc_x -= self.speed
             self.display.blit(self.bg, (self.sc_x, self.sc_y))
         elif direction == 'D' and self.sc_x <= -560 or direction == 'D' and self.rect.x < 72:
