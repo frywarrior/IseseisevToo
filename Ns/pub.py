@@ -171,5 +171,5 @@ class Pub:
         if self.pub_door.rect.colliderect(self.rect):
             self.sc_y += 3 * self.speed
             self.pub_door.enter_pub('S')
-            print('yep')
+            print('asukoht: world')
             return True

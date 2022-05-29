@@ -170,5 +170,5 @@ class Hero:
         if self.pub_door.rect.colliderect(self.rect):
             self.sc_y -= 3 * self.speed
             self.pub_door.enter_pub('W')
-            print('yep')
+            print('asukoht: pub')
             return True
