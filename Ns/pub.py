@@ -18,7 +18,7 @@ class Pub:
         # Objectid
         self.pub_door = Obj(self.display, self.speed, (self.sc_x, self.sc_y), self.rect,
                             self.bg,
-                            (96, 143, 16, 16), (71, 83, 16, 16))
+                            (96, 143, 16, 16), (75, 83, 16, 16))
 
     CDC_Time = 4
     CDC = 0

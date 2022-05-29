@@ -51,7 +51,7 @@ clock = pygame.time.Clock()
 # graafika laadimine
 
 hero = Hero(screen, (72, 66), (screenPosX, screenPosY))
-Pub = Pub(screen, (72, 66), (-25, -60))
+Pub = Pub(screen, (72, 66), (-21, -60))
 
 #
 gameover = False
