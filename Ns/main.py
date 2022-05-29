@@ -23,19 +23,7 @@ def draw():
     window.blit(frame, frame.get_rect())
     pygame.display.flip()
 
-
-pygame.display.set_caption("Game_Test")
-clock = pygame.time.Clock()
-#
-
-# graafika laadimine
-
-hero = Hero(screen, (72, 66), (screenPosX, screenPosY))
-
-#
-
-world = False
-while not world:
+def gameclosing():
     # fps
     clock.tick(30)
     # mängu sulgemine ristist
@@ -54,7 +42,32 @@ while not world:
             print(scaled_pos)
             print(pygame.mouse.get_pos())
 
-    hero.moving()
-    if hero.pub_collide():
-        world = True
-    draw()
+
+pygame.display.set_caption("Game_Test")
+clock = pygame.time.Clock()
+#
+
+# graafika laadimine
+
+hero = Hero(screen, (72, 66), (screenPosX, screenPosY))
+
+#
+gameover = False
+
+world = True
+pub = False
+while not gameover:
+    while world:
+        gameclosing()
+
+        hero.moving()
+        if hero.pub_collide():
+            world = False
+            pub = True
+        draw()
+
+    while pub:
+        gameclosing()
+
+        draw()
+
