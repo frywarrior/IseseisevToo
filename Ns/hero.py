@@ -1,4 +1,5 @@
 import pygame
+from objects import Obj
 
 
 class Hero:
@@ -12,6 +13,10 @@ class Hero:
         self.sc_y = screenpos[1]
         self.rect = pygame.rect.Rect(self.x, self.y, 16, 16)
         self.speed = 3
+        # Objectid
+        self.pub_door = Obj(self.display, self.speed, (self.sc_x, self.sc_y), self.rect,
+                            pygame.image.load("img/map.png"),
+                            (288, 434, 24, 20), (90, 50, 24, 20))
 
     CDC_Time = 4
     CDC = 0
@@ -130,12 +135,13 @@ class Hero:
         elif direction == 'D' and self.sc_x <= -560 or direction == 'D' and self.rect.x < 72:
             self.rect.move_ip(self.speed, 0)
         #
-
+        self.pub_door.main(direction)
         #
         self.display.blit(self.bg, (self.sc_x, self.sc_y))
 
     def update(self):
         self.display.blit(self.bg, (self.sc_x, self.sc_y))
+        self.display.blit(self.bg, self.pub_door.rect, self.pub_door.imgpos)
         Hero.CDC = 0
 
     def dispos(self):
@@ -158,3 +164,8 @@ class Hero:
         else:
             self.update()
             self.stand()
+
+    def pub_collide(self):
+
+        if self.pub_door.rect.colliderect(self.rect):
+            print('yep')

@@ -10,6 +10,7 @@ screenX = 640
 screenY = 480
 screenPosX, screenPosY = -200, -450
 
+
 window = pygame.display.set_mode([screenX, screenY])
 window_rect = window.get_rect()
 
@@ -28,12 +29,13 @@ clock = pygame.time.Clock()
 #
 
 # graafika laadimine
+
 hero = Hero(screen, (72, 66), (screenPosX, screenPosY))
 
 #
 
-gameover = False
-while not gameover:
+world = False
+while not world:
     # fps
     clock.tick(30)
     # mängu sulgemine ristist
@@ -52,5 +54,5 @@ while not gameover:
             print(scaled_pos)
 
     hero.moving()
-
+    hero.pub_collide()
     draw()
