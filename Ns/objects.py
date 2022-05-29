@@ -1,5 +1,6 @@
 import pygame
 
+
 class Obj:
     def __init__(self, display, speed, screenpos, player, img, imgpos, rect):
         self.display = display

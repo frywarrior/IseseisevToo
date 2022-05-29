@@ -2,6 +2,7 @@ import pygame
 
 from objects import Obj
 
+
 class Pub:
 
     def __init__(self, display, location, screenpos):
