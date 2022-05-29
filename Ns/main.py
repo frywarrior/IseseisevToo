@@ -52,7 +52,9 @@ while not world:
             scaled_pos = ((pos[0] / ratio_x) - hero.sc_x, (pos[1] / ratio_y) - hero.sc_y)
 
             print(scaled_pos)
+            print(pygame.mouse.get_pos())
 
     hero.moving()
-    hero.pub_collide()
+    if hero.pub_collide():
+        world = True
     draw()

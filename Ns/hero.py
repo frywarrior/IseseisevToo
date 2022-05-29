@@ -16,7 +16,7 @@ class Hero:
         # Objectid
         self.pub_door = Obj(self.display, self.speed, (self.sc_x, self.sc_y), self.rect,
                             pygame.image.load("img/map.png"),
-                            (288, 434, 24, 20), (90, 50, 24, 20))
+                            (288, 434, 24, 20), (88, -16, 24, 20))
 
     CDC_Time = 4
     CDC = 0
@@ -166,6 +166,6 @@ class Hero:
             self.stand()
 
     def pub_collide(self):
-
         if self.pub_door.rect.colliderect(self.rect):
             print('yep')
+            return True
