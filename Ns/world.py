@@ -113,6 +113,7 @@ class Hero:
             self.display.blit(self.bg, (self.sc_x, self.sc_y))
         elif direction == 'S' and self.sc_y <= -576 or direction == 'S' and self.rect.y < 66:
             self.rect.move_ip(0, self.speed)
+
         #
 
         if direction == 'W' and self.sc_y < -1 and self.rect.y == 66:
@@ -167,5 +168,7 @@ class Hero:
 
     def pub_collide(self):
         if self.pub_door.rect.colliderect(self.rect):
+            self.sc_y -= 3 * self.speed
+            self.pub_door.enter_pub('W')
             print('yep')
             return True

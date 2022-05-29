@@ -2,7 +2,7 @@
 import pygame
 import sys
 from world import Hero
-from pub import pub
+from pub import Pub
 
 pygame.init()
 
@@ -10,7 +10,6 @@ pygame.init()
 screenX = 640
 screenY = 480
 screenPosX, screenPosY = -200, -450
-
 
 window = pygame.display.set_mode([screenX, screenY])
 window_rect = window.get_rect()
@@ -24,7 +23,8 @@ def draw():
     window.blit(frame, frame.get_rect())
     pygame.display.flip()
 
-def gameclosing():
+
+def loop():
     # fps
     clock.tick(30)
     # mängu sulgemine ristist
@@ -51,6 +51,7 @@ clock = pygame.time.Clock()
 # graafika laadimine
 
 hero = Hero(screen, (72, 66), (screenPosX, screenPosY))
+Pub = Pub(screen, (72, 66), (-25, -60))
 
 #
 gameover = False
@@ -59,16 +60,20 @@ world = True
 pub = False
 while not gameover:
     while world:
-        gameclosing()
+        loop()
 
         hero.moving()
         if hero.pub_collide():
             world = False
             pub = True
+            screen.fill([0, 0, 0])
         draw()
 
     while pub:
-        gameclosing()
+        loop()
+        Pub.moving()
+        if Pub.pub_collide():
+            world = True
+            pub = False
 
         draw()
-
