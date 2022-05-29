@@ -1,7 +1,8 @@
 # Franco Kikkas IS21, Lis ns kuna igav
 import pygame
 import sys
-from hero import Hero
+from world import Hero
+from pub import pub
 
 pygame.init()
 
