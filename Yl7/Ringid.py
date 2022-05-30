@@ -1,6 +1,5 @@
 import pygame, random  # impordib pygame ja random'i
 screen, im = pygame.display.set_mode([640, 480]), 8  # loob ekraani suurusega 640 x 480 ja ringi suuruse
-screen.fill([0, 0, 0])  # täidabe kraani mustaga
 while True:  # kui on tõene
     for i in pygame.event.get():  # võtab evendid
         if i.type == pygame.QUIT:  # kui kasutaja vajutab "X" nupule
