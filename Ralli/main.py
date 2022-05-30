@@ -46,7 +46,7 @@ while not gameover:
     for i in events:
         if i.type == pygame.QUIT:
             quit()
-            sys.exit()
+
 
     # Tausta liikumine ja skoor
     Upos -= BspeedY
