@@ -6,4 +6,6 @@ while True:
         if i.type == pygame.QUIT:
             quit()
         if i.type == pygame.MOUSEBUTTONDOWN:
-            pygame.draw.circle(screen, [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)], pygame.mouse.get_pos(), im, 1); im += 4; pygame.display.flip()
+            pygame.draw.circle(screen, [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)], pygame.mouse.get_pos(), im, 1)
+            im += 4
+    pygame.display.flip()
