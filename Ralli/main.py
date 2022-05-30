@@ -47,7 +47,6 @@ while not gameover:
         if i.type == pygame.QUIT:
             quit()
 
-
     # Tausta liikumine ja skoor
     Upos -= BspeedY
     Dpos -= BspeedY
