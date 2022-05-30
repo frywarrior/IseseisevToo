@@ -1,26 +1,17 @@
-import pygame
-import random
+import pygame, numpy
 
 
-class Dot:
-    def __init__(self, x, y, size):
-        self.x = x
-        self.y = y
-        self.color = random_color()
-        self.size = size
+class Ring:
+    def __init__(self):
+        self.xy = pygame.mouse.get_pos()
+        self.color = list(numpy.random.choice(range(256), size=3))
+        self.size = im
 
     def draw(self):
-        pygame.draw.circle(screen, self.color, (self.x, self.y), self.size, 1)
+        pygame.draw.circle(screen, self.color, self.xy, self.size, 1)
 
 
-def random_color():
-    r = random.randint(0, 255)
-    g = random.randint(0, 255)
-    b = random.randint(0, 255)
-    return r, g, b
-
-
-dots = []
+ringid = []
 
 screen, im = pygame.display.set_mode([640, 480]), 8  # loob ekraani suurusega 640 x 480 ja ringi suuruse
 while True:  # kui on tõen
@@ -29,10 +20,9 @@ while True:  # kui on tõen
         if i.type == pygame.QUIT:  # kui kasutaja vajutab "X" nupule
             quit()  # väljub mängust
         if i.type == pygame.MOUSEBUTTONDOWN:  # kui hiirenupp on all
-            dots.append(Dot(pygame.mouse.get_pos()[0], pygame.mouse.get_pos()[1], im))
+            ringid.append(Ring())
             if im >= 48:  # if dot in range ball
-                del dots[0]
+                del ringid[0]
             im += 4  # Uuendab järgmise ringi suurust
-    for dot in dots:
-        dot.draw()
+    for ring in ringid: ring.draw()
     pygame.display.flip()  # uuendab ekraani
