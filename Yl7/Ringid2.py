@@ -1,4 +1,5 @@
-import pygame, numpy
+import numpy
+import pygame
 
 
 class Ring:
@@ -24,5 +25,6 @@ while True:  # kui on tõen
             if im >= 48:  # if dot in range ball
                 del ringid[0]
             im += 4  # Uuendab järgmise ringi suurust
-    for ring in ringid: ring.draw()
+    for ring in ringid:
+        ring.draw()
     pygame.display.flip()  # uuendab ekraani
