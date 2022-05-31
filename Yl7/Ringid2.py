@@ -1,7 +1,6 @@
 import pygame, numpy  # impordib pygame ja numpy
 
-screen, im = pygame.display.set_mode([640, 480]), 8  # loob ekraani suurusega 640 x 480 ja ringi suuruse
-
+screen, im , ringid= pygame.display.set_mode([640, 480]), 8, []  # loob ekraani suurusega 640 x 480 ja ringi suuruse ja loob uue listi nimega ringid
 
 class Ring:  # loob klassi nimega Ring
     def __init__(self):  # lisab enda muutujad
@@ -11,9 +10,6 @@ class Ring:  # loob klassi nimega Ring
 
     def draw(self):  # joonistamise funktsioon
         pygame.draw.circle(screen, self.color, self.xy, self.size, 1)  # joonistab ringi oma parameetritega
-
-
-ringid = []  # loob uue listi nimega ringid
 
 while True:  # kui on tõene
     screen.fill([0, 0, 0])  # täidab ekraani mustaga
