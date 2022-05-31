@@ -1,6 +1,6 @@
-import numpy
-import pygame
+import pygame, numpy
 
+screen, im = pygame.display.set_mode([640, 480]), 8  # loob ekraani suurusega 640 x 480 ja ringi suuruse
 
 class Ring:
     def __init__(self):
@@ -11,10 +11,8 @@ class Ring:
     def draw(self):
         pygame.draw.circle(screen, self.color, self.xy, self.size, 1)
 
-
 ringid = []
 
-screen, im = pygame.display.set_mode([640, 480]), 8  # loob ekraani suurusega 640 x 480 ja ringi suuruse
 while True:  # kui on tõen
     screen.fill([0, 0, 0])
     for i in pygame.event.get():  # võtab evendid
