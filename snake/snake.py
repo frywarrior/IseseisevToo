@@ -19,6 +19,7 @@ snake_speed = 5
 ind = 0
 
 snake = []
+moves = []
 
 snake.append(Snekhead([320, 240]))
 
@@ -32,11 +33,14 @@ while not gameover:
         if event.type == pygame.KEYDOWN:
             if event.key == pygame.K_RIGHT:
 
+
     screen.fill([0, 0, 0])
 
     for i in snake:
         i.draw()
         ind += 1
+
+
 
 
 
