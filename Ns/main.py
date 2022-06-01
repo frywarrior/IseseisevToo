@@ -77,3 +77,4 @@ while not gameover:
             pub = False
 
         draw()
+
