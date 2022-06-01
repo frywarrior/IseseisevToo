@@ -8,3 +8,4 @@ while True:  # kui on tõene
             pygame.draw.circle(screen, [random.randint(0, 255), random.randint(0, 255), random.randint(0, 255)],pygame.mouse.get_pos(), im, 1)  # joonistab ringi
             im += 4  # Uuendab järgmise ringi suurust
     pygame.display.flip()  # uuendab ekraani
+    # 10 rida yee
