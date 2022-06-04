@@ -93,7 +93,7 @@ def main():
                 if event.ui_element == ruutjuur:
                     if sums[-1] not in marks:
                         sums = math.sqrt(eval(sums))
-                        disp = math.sqrt(eval(sums))
+                        disp = sums
                         print(sums)
 
                 if event.ui_element == kustuta:
@@ -106,6 +106,14 @@ def main():
                     disp = "0"
                     print(sums)
 
+                if event.ui_element == equal:
+                    if sums[-1] not in marks:
+                        try:
+                            sums = eval(sums)
+                            disp = sums
+                        except:
+                            sums = "0"
+                            disp = "ERROR"
 
                 if event.ui_element == seitse:
                     sums = sums + "7"
