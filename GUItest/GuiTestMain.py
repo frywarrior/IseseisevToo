@@ -1,6 +1,6 @@
 import pygame
 import pygame_gui
-
+import math
 
 def button(name, location, size, manager):
     return pygame_gui.elements.UIButton(relative_rect=pygame.Rect(location, size),
@@ -9,7 +9,9 @@ def button(name, location, size, manager):
 
 
 def main():
-    sums = ""
+    sums = "0"
+    disp = "0"
+    marks = ["+", "-", "/", "*"]
 
     pygame.init()
 
@@ -21,13 +23,29 @@ def main():
 
     manager = pygame_gui.UIManager((200, 300))
 
+    # Märgid
+
     plus = button("+", (150, 100), (50, 50), manager)
 
     miinus = button("-", (150, 150), (50, 50), manager)
 
-    jagamine = button("÷", (150, 200), (50, 50), manager)
+    jaga = button("÷", (150, 200), (50, 50), manager)
 
-    korrutamine =  button("x", (150, 250), (50, 50), manager)
+    korruta = button("x", (150, 250), (50, 50), manager)
+
+    astenda = button("^", (0, 50), (50, 50), manager)
+
+    ruutjuur = button("√", (50, 50), (50, 50), manager)
+
+    kustuta = button("C", (100, 50), (50, 50), manager)
+
+    clear = button("Ce", (150, 50), (50, 50), manager)
+
+    equal = button("=", (100, 250), (50, 50), manager)
+
+    point = button(".", (50, 250), (50, 50), manager)
+
+    # Numbrid
 
     seitse = button("7", (0, 100), (50, 50), manager)
 
@@ -41,12 +59,54 @@ def main():
                 is_running = False
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
+                # Märgid
                 if event.ui_element == plus:
-                    if sums[-1] != "+":
+                    if sums[-1] not in marks:
                         sums = sums + "+"
+                        disp = disp + "+"
                         print(sums)
-                    else:
+
+                if event.ui_element == miinus:
+                    if sums[-1] not in marks:
+                        sums = sums + "-"
+                        disp = disp + "-"
                         print(sums)
+
+                if event.ui_element == jaga:
+                    if sums[-1] not in marks:
+                        sums = sums + "/"
+                        disp = disp + "÷"
+                        print(sums)
+
+                if event.ui_element == korruta:
+                    if sums[-1] not in marks:
+                        sums = sums + "*"
+                        disp = disp + "x"
+                        print(sums)
+
+                if event.ui_element == astenda:
+                    if sums[-1] not in marks:
+                        sums = 2 ** eval(sums)
+                        disp = sums
+                        print(sums)
+
+                if event.ui_element == ruutjuur:
+                    if sums[-1] not in marks:
+                        sums = math.sqrt(eval(sums))
+                        disp = math.sqrt(eval(sums))
+                        print(sums)
+
+                if event.ui_element == kustuta:
+                    sums = sums[:-1]
+                    disp = disp[:-1]
+                    print(sums)
+
+                if event.ui_element == clear:
+                    sums = "0"
+                    disp = "0"
+                    print(sums)
+
+
                 if event.ui_element == seitse:
                     sums = sums + "7"
                     print(sums)
