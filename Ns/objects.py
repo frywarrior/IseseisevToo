@@ -3,13 +3,13 @@ import pygame
 
 class Obj:
     def __init__(self, display, speed, screenpos, player, img, imgpos, rect):
-        self.display = display
+        self.display = display # kus displayi peal on
         self.speed = speed
-        self.sc_x = screenpos[0]
-        self.sc_y = screenpos[1]
+        self.sc_x = screenpos[0] # screen pos in relation to the player
+        self.sc_y = screenpos[1] # screen pos in relation to the player
         #
         #
-        self.player = player
+        self.player = player # player rect
         self.img = img
         self.imgpos = imgpos
         self.rect = pygame.Rect(rect)

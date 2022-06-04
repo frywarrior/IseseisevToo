@@ -14,6 +14,7 @@ class Pub:
         self.sc_x = screenpos[0]
         self.sc_y = screenpos[1]
         self.rect = pygame.rect.Rect(self.x, self.y, 16, 16)
+        self.hitrect = pygame.rect.Rect(self.x, self.y + 11, 16, 5)
         self.speed = 3
         # Objectid
         self.pub_door = Obj(self.display, self.speed, (self.sc_x, self.sc_y), self.rect,
@@ -168,7 +169,7 @@ class Pub:
             self.stand()
 
     def pub_collide(self):
-        if self.pub_door.rect.colliderect(self.rect):
+        if self.pub_door.rect.colliderect(self.hitrect):
             self.sc_y += 3 * self.speed
             self.pub_door.enter_pub('S')
             print('asukoht: world')
