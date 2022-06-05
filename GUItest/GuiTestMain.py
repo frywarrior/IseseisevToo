@@ -3,20 +3,16 @@ import pygame_gui
 from pygame_gui.core import ObjectID
 import math
 
-TLblue = (100, 100, 200, 10)
 
 s = pygame.Surface((200, 300))  # the size of your rect
-s.set_alpha(128)  # alpha level
-s.fill((100, 100, 200))  # this fills the entire surface
+s.set_alpha(200)  # alpha level
+s.fill((0, 0, 50))  # this fills the entire surface
 
 
 def button(name, location, size, manager):
     return pygame_gui.elements.UIButton(relative_rect=pygame.Rect(location, size),
                                         text=f'{name}',
-                                        manager=manager,
-                                        object_id=ObjectID(class_id='@friendly_buttons',
-                                                           object_id='#hello_button')
-                                        )
+                                        manager=manager)
 
 
 def main():
