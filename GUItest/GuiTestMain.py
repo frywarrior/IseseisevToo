@@ -1,12 +1,6 @@
 import pygame
 import pygame_gui
-from pygame_gui.core import ObjectID
 import math
-
-
-s = pygame.Surface((200, 300))  # the size of your rect
-s.set_alpha(200)  # alpha level
-s.fill((0, 0, 50))  # this fills the entire surface
 
 
 def button(name, location, size, manager):
@@ -21,13 +15,13 @@ def main():
     marks = ["+", "-", "/", "*", "."]
 
     pygame.init()
+    pygame.font.init()
 
     pygame.display.set_caption('Kalk')
     window_surface = pygame.display.set_mode((200, 300))
 
     background = pygame.Surface((200, 300))
-    background.fill((255, 255, 255))
-    background.blit(s, (0, 0))  # (0,0) are the top-left coordinates
+    background.fill((25, 55, 84))
 
     manager = pygame_gui.UIManager((200, 300), 'theme.json')
 
@@ -145,7 +139,7 @@ def main():
                 if event.ui_element == point:
                     if sums[-1] not in marks:
                         sums = sums + "."
-                        disp = disp + ","
+                        disp = disp + "."
                         print(sums)
                 # Numbrid
                 if event.ui_element == seitse:
@@ -195,6 +189,11 @@ def main():
             manager.process_events(event)
 
         manager.update(time_delta)
+
+        pygame.draw.rect(background, (69, 73, 78), (2, 2, 196, 46), 0, 5)
+        pygame.draw.rect(background, (221, 221, 221), (2, 2, 196, 46), 1, 5)
+
+        background.blit(pygame.font.SysFont("arial", 16, bold=False, italic=False).render(f"{disp}", True, [197, 203, 216]), [10, 16])
 
         window_surface.blit(background, (0, 0))
         manager.draw_ui(window_surface)
