@@ -3,6 +3,7 @@ import pygame
 import sys
 from world import Hero
 from pub import Pub
+from Escmenu import escmenu
 
 pygame.init()
 
@@ -32,7 +33,6 @@ def loop():
     for i in events:
         if i.type == pygame.QUIT:
             quit()
-            sys.exit()
         if i.type == pygame.MOUSEBUTTONDOWN:
             pos = list(pygame.mouse.get_pos())
             # take the mouse position and scale it, too
@@ -42,6 +42,9 @@ def loop():
 
             print(scaled_pos)
             print(pygame.mouse.get_pos())
+        if i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_ESCAPE:
+                escmenu(window)
 
 
 pygame.display.set_caption("Game_Test")
