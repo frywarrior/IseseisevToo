@@ -4,9 +4,10 @@ from world import Hero
 from pub import Pub as Pubd
 from Escmenu import escmenu
 
+
 def main():
     def draw():
-        frame = pygame.transform.scale(screen, (screenX, screenY))
+        frame = pygame.transform.scale(screen, (screen_x, screen_y))
         window.blit(frame, frame.get_rect())
         pygame.display.flip()
 
@@ -34,11 +35,11 @@ def main():
     pygame.init()
 
     # ekraani seaded
-    screenX = 640
-    screenY = 480
-    screenPosX, screenPosY = -200, -450
+    screen_x = 640
+    screen_y = 480
+    screen_pos_x, screen_pos_y = -200, -450
 
-    window = pygame.display.set_mode([screenX, screenY])
+    window = pygame.display.set_mode([screen_x, screen_y])
     window_rect = window.get_rect()
 
     screen = pygame.Surface([160, 144])
@@ -50,7 +51,7 @@ def main():
 
     # graafika laadimine
 
-    hero = Hero(screen, (72, 66), (screenPosX, screenPosY))
+    hero = Hero(screen, (72, 66), (screen_pos_x, screen_pos_y))
     Pub = Pubd(screen, (72, 66), (-21, -60))
 
     #
@@ -77,6 +78,7 @@ def main():
                 pub = False
 
             draw()
+
 
 if __name__ == "__main__":
     main()
