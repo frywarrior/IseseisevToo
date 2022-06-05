@@ -1,10 +1,12 @@
 import pygame
 import pygame_gui
 
+
 def button(name, location, size, manager):
     return pygame_gui.elements.UIButton(relative_rect=pygame.Rect(location, size),
                                         text=f'{name}',
                                         manager=manager)
+
 
 def escmenu(screen):
     s = pygame.Surface((640, 480))
@@ -14,11 +16,11 @@ def escmenu(screen):
 
     clock = pygame.time.Clock()
 
-    manager = pygame_gui.UIManager((640, 480))
+    manager = pygame_gui.UIManager((640, 480), "theme.json")
 
-    ret = button("Return", (320, 240), (100, 50), manager)
+    ret = button("Return", (270, 240), (100, 50), manager)
 
-    qui = button("Quit", (320, 300), (100, 50), manager)
+    qui = button("Quit", (270, 300), (100, 50), manager)
 
     paused = True
 
@@ -48,5 +50,3 @@ def escmenu(screen):
         manager.update(time_delta)
         manager.draw_ui(screen)
         pygame.display.flip()
-
-
