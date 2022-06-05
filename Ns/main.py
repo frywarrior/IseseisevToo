@@ -1,22 +1,8 @@
 # Franco Kikkas IS21, Lis ns kuna igav
 import pygame
-import sys
 from world import Hero
 from pub import Pub
 from Escmenu import escmenu
-
-pygame.init()
-
-# ekraani seaded
-screenX = 640
-screenY = 480
-screenPosX, screenPosY = -200, -450
-
-window = pygame.display.set_mode([screenX, screenY])
-window_rect = window.get_rect()
-
-screen = pygame.Surface([160, 144])
-screen_rect = screen.get_rect()
 
 
 def draw():
@@ -46,6 +32,19 @@ def loop():
             if i.key == pygame.K_ESCAPE:
                 escmenu(window)
 
+
+pygame.init()
+
+# ekraani seaded
+screenX = 640
+screenY = 480
+screenPosX, screenPosY = -200, -450
+
+window = pygame.display.set_mode([screenX, screenY])
+window_rect = window.get_rect()
+
+screen = pygame.Surface([160, 144])
+screen_rect = screen.get_rect()
 
 pygame.display.set_caption("Game_Test")
 clock = pygame.time.Clock()
