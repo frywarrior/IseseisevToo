@@ -80,41 +80,59 @@ def main():
 
             if event.type == pygame_gui.UI_BUTTON_PRESSED:
                 # Märgid
-                if event.ui_element == plus:
-                    if sums[-1] not in marks:
-                        sums = sums + "+"
-                        disp = disp + "+"
-                        print(sums)
+                try:
+                    if event.ui_element == plus:
+                        if sums[-1] not in marks:
+                            sums = sums + "+"
+                            disp = disp + "+"
+                            print(sums)
+                except:
+                    pass
 
                 if event.ui_element == miinus:
-                    if sums[-1] not in marks:
-                        sums = sums + "-"
-                        disp = disp + "-"
-                        print(sums)
+                    try:
+                        if sums[-1] not in marks:
+                            sums = sums + "-"
+                            disp = disp + "-"
+                            print(sums)
+                    except:
+                        pass
 
                 if event.ui_element == jaga:
-                    if sums[-1] not in marks:
-                        sums = sums + "/"
-                        disp = disp + "÷"
-                        print(sums)
+                    try:
+                        if sums[-1] not in marks:
+                            sums = sums + "/"
+                            disp = disp + "÷"
+                            print(sums)
+                    except:
+                        pass
 
                 if event.ui_element == korruta:
-                    if sums[-1] not in marks:
-                        sums = sums + "*"
-                        disp = disp + "x"
-                        print(sums)
+                    try:
+                        if sums[-1] not in marks:
+                            sums = sums + "*"
+                            disp = disp + "x"
+                            print(sums)
+                    except:
+                        pass
 
                 if event.ui_element == astenda:
-                    if sums[-1] not in marks:
-                        sums = str(eval(sums) ** 2)
-                        disp = sums
-                        print(sums)
+                    try:
+                        if sums[-1] not in marks:
+                            sums = str(eval(sums) ** 2)
+                            disp = sums
+                            print(sums)
+                    except:
+                        pass
 
                 if event.ui_element == ruutjuur:
-                    if sums[-1] not in marks:
-                        sums = str(math.sqrt(eval(sums)))
-                        disp = sums
-                        print(sums)
+                    try:
+                        if sums[-1] not in marks:
+                            sums = str(math.sqrt(eval(sums)))
+                            disp = sums
+                            print(sums)
+                    except:
+                        pass
 
                 if event.ui_element == kustuta:
                     sums = sums[:-1]
@@ -127,20 +145,26 @@ def main():
                     print(sums)
 
                 if event.ui_element == equal:
-                    if sums[-1] not in marks:
-                        try:
-                            sums = str(eval(sums))
-                            disp = sums
-                            print(sums)
-                        except:
-                            sums = "0"
-                            disp = "ERROR"
+                    try:
+                        if sums[-1] not in marks:
+                            try:
+                                sums = str(eval(sums))
+                                disp = sums
+                                print(sums)
+                            except:
+                                sums = "0"
+                                disp = "ERROR"
+                    except:
+                        pass
 
                 if event.ui_element == point:
-                    if sums[-1] not in marks:
-                        sums = sums + "."
-                        disp = disp + "."
-                        print(sums)
+                    try:
+                        if sums[-1] not in marks:
+                            sums = sums + "."
+                            disp = disp + "."
+                            print(sums)
+                    except:
+                        pass
                 # Numbrid
                 if event.ui_element == seitse:
                     sums = sums + "7"
@@ -193,7 +217,9 @@ def main():
         pygame.draw.rect(background, (69, 73, 78), (2, 2, 196, 46), 0, 5)
         pygame.draw.rect(background, (221, 221, 221), (2, 2, 196, 46), 1, 5)
 
-        background.blit(pygame.font.SysFont("arial", 16, bold=False, italic=False).render(f"{disp}", True, [197, 203, 216]), [10, 16])
+        background.blit(
+            pygame.font.SysFont("arial", 16, bold=False, italic=False).render(f"{disp}", True, [197, 203, 216]),
+            [10, 16])
 
         window_surface.blit(background, (0, 0))
         manager.draw_ui(window_surface)
