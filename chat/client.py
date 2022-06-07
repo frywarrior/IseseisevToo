@@ -1,6 +1,6 @@
 import socket  # importib mooduli nimega socket
 
-s = socket.socket()  # loob uue pistikupesa# loob uue pistikupesa
+s = socket.socket()  # loob uue pistikupesa
 host = input(str("Please enter the hostname of the server:"))  # prindib teksti
 port = 8081  # seab ühenduse pordi
 s.connect((host, port))  # ühendab pistikupesa sellele aadressile
