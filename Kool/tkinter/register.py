@@ -54,6 +54,7 @@ def register():
     Label(screen1, text="").pack()
     Button(screen1, text="Register", width=10, height=1, command=register_user).pack()
 
+
 def login_user():
     # võtab teisest funktsioonist kasutaja nime ja parooli
     username_info = username.get()
@@ -118,6 +119,7 @@ def main_screen():
 
     # uuendab screeni
     screen.mainloop()
+
 
 # alustab main loopi
 main_screen()
