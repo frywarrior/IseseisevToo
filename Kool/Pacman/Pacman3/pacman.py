@@ -465,7 +465,7 @@ def startGame():
     all_sprites_list.add(Pacman)
     pacman_collide.add(Pacman)
 
-    Blinky = Ghost(w, b_h, "images/Blinky.png")
+    Blinky = Ghost(w, b_h, "images/ual.png")
     monsta_list.add(Blinky)
     all_sprites_list.add(Blinky)
 
@@ -532,6 +532,20 @@ def startGame():
                     Pacman.changespeed(0, 30)
                     Pacman.updateimg(-90)
 
+                if event.key == pygame.K_a:
+                    Pacman.changespeed(-60, 0)
+                    Pacman.updateimg(180)
+                if event.key == pygame.K_d:
+                    Pacman.changespeed(60, 0)
+                    Pacman.updateimg(0)
+                if event.key == pygame.K_w:
+                    Pacman.changespeed(0, -60)
+                    Pacman.updateimg(90)
+                if event.key == pygame.K_s:
+                    Pacman.changespeed(0, 60)
+                    Pacman.updateimg(-90)
+
+
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
                     Pacman.changespeed(30, 0)
@@ -541,6 +555,15 @@ def startGame():
                     Pacman.changespeed(0, 30)
                 if event.key == pygame.K_DOWN:
                     Pacman.changespeed(0, -30)
+
+                if event.key == pygame.K_a:
+                    Pacman.changespeed(60, 0)
+                if event.key == pygame.K_d:
+                    Pacman.changespeed(-60, 0)
+                if event.key == pygame.K_w:
+                    Pacman.changespeed(0, 60)
+                if event.key == pygame.K_s:
+                    Pacman.changespeed(0, -60)
 
         # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
 
