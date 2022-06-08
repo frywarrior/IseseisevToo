@@ -122,4 +122,5 @@ def main_screen():
 
 
 # alustab main loopi
-main_screen()
+if __name__ == "__main__":
+    main_screen()
