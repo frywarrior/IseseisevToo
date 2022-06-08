@@ -9,10 +9,11 @@ blue = (0, 0, 255)
 green = (0, 255, 0)
 red = (255, 0, 0)
 purple = (255, 0, 255)
-yellow = (255, 255, 0)
+yellow = (0, 255, 255)
 
 Trollicon = pygame.image.load('images/pacman.png')
 pygame.display.set_icon(Trollicon)
+
 
 # Add music
 
@@ -122,6 +123,7 @@ class Block(pygame.sprite.Sprite):
 
     # This class represents the bar at the bottom that the player controls
 
+
 class Animation(object):
     def __init__(self, img, width, height):
         # Load the sprite sheet
@@ -172,6 +174,7 @@ class Animation(object):
             if self.index == len(self.image_list):
                 self.index = 0
 
+
 class Player(pygame.sprite.Sprite):
     # Set speed vector
     change_x = 0
@@ -194,9 +197,7 @@ class Player(pygame.sprite.Sprite):
         self.prev_x = x
         self.prev_y = y
 
-
     def updateimg(self, degrees):
-
         img = pygame.image.load("images/pacman.png")
         self.image = pygame.transform.rotate(img, degrees)
 
@@ -544,7 +545,6 @@ def startGame():
                 if event.key == pygame.K_s:
                     Pacman.changespeed(0, 60)
                     Pacman.updateimg(-90)
-
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_LEFT:
