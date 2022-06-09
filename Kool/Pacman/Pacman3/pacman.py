@@ -13,6 +13,9 @@ yellow = (0, 255, 255)
 Trollicon = pygame.image.load('images/pacman.png')
 pygame.display.set_icon(Trollicon)
 
+TIMER, tt = pygame.USEREVENT+2, 1000
+
+pygame.time.set_timer(TIMER, tt)
 
 # Seina klass
 class Wall(pygame.sprite.Sprite):
@@ -343,6 +346,11 @@ def startGame():  # mängu põhi funktsioon
     c_turn = 0
     c_steps = 0
 
+    pygame.mixer.music.set_volume(0.2)
+
+    pygame.mixer.music.load('images/kann.mp3')
+    pygame.mixer.music.play(-1)
+
     # Mängija pacmani kujutis
     Pacman = Player(w, p_h, "images/pacman.png")
     all_sprites_list.add(Pacman)
@@ -388,11 +396,14 @@ def startGame():  # mängu põhi funktsioon
     bll = len(block_list)
 
     score = 0
+    Timer = 0
 
     done = False
 
     while not done:
         for event in pygame.event.get():
+            if event.type == TIMER:
+                Timer += 1
             if event.type == pygame.QUIT:
                 done = True
 
@@ -491,7 +502,9 @@ def startGame():  # mängu põhi funktsioon
         monsta_list.draw(screen)
         # skoor
         text = font.render("Score: " + str(score) + "/" + str(bll), True, red)
+        timer = font.render("Time: " + str(Timer), True, green)
         screen.blit(text, [10, 10])
+        screen.blit(timer, [200, 10])
         # Kui koik pallid on korjatud tuleb kiri "You WOn"
         if score == bll:
             doNext("Congratulations, you won!", 145, all_sprites_list, block_list, monsta_list, pacman_collide,
@@ -529,6 +542,7 @@ def doNext(message, left, all_sprites_list, block_list, monsta_list, pacman_coll
                     startGame()
 
         # Hall taust
+        pygame.mixer.music.stop()
         win = pygame.Surface((400, 200))  # Ekraani suurus
         win.set_alpha(10)  # Läbipaistvus
         win.fill((128, 128, 128))  # Täidab ekraani halliga
