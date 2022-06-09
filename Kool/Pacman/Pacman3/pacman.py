@@ -101,6 +101,7 @@ class Player(pygame.sprite.Sprite):
     # määrab kiiruse
     change_x = 0
     change_y = 0
+
     def __init__(self, x, y, filename):
         pygame.sprite.Sprite.__init__(self)
         self.image = pygame.image.load(filename).convert()
@@ -143,7 +144,7 @@ class Player(pygame.sprite.Sprite):
             if y_collide:
                 self.rect.top = old_y
 
-        if gate != False:  #kui värav on tõene
+        if gate:  # kui värav on tõene
             gate_hit = pygame.sprite.spritecollide(self, gate, False)
             if gate_hit:
                 self.rect.left = old_x
@@ -280,7 +281,7 @@ Clyde_directions = [
     [0, -15, 11],
     [15, 0, 9],
 ]
-#otsijate liikumise suund
+# otsijate liikumise suund
 pl = len(Pinky_directions) - 1
 bl = len(Blinky_directions) - 1
 il = len(Inky_directions) - 1
@@ -300,7 +301,7 @@ background = pygame.Surface(screen.get_size())
 background = background.convert()
 # Värvib tausta mustaks
 background.fill(black)
-#fpsi jaoks
+# fpsi jaoks
 clock = pygame.time.Clock()
 
 # Font
