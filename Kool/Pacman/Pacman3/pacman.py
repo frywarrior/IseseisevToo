@@ -1,5 +1,6 @@
 # importib Pygame
 import pygame
+
 #
 black = (0, 0, 0)
 white = (255, 255, 255)
@@ -8,37 +9,26 @@ green = (0, 255, 0)
 red = (255, 0, 0)
 purple = (255, 0, 255)
 yellow = (0, 255, 255)
-#Lisab pacmani pildi
+# lisab pacmani logo
 Trollicon = pygame.image.load('images/pacman.png')
 pygame.display.set_icon(Trollicon)
 
 
-# Lisab muusika
-
-
 # Seina klass
 class Wall(pygame.sprite.Sprite):
-    # Constructor function
     def __init__(self, x, y, width, height, color):
-        # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
-
-        # Make a blue wall, of the size specified in the parameters
         self.image = pygame.Surface([width, height])
         self.image.fill(color)
-
-        # Make our top-left corner the passed-in location.
         self.rect = self.image.get_rect()
         self.rect.top = y
         self.rect.left = x
 
 
-#
-def setupRoomOne(all_sprites_list):
-    # Make the walls. (x_pos, y_pos, width, height)
+def setupRoomOne(all_sprites_list):  # teeb leveli
     wall_list = pygame.sprite.RenderPlain()
 
-    #Seinad
+    # Seinad
     walls = [[0, 0, 6, 600],
              [0, 0, 600, 6],
              [0, 600, 606, 6],
@@ -79,16 +69,15 @@ def setupRoomOne(all_sprites_list):
              [360, 540, 126, 6]
              ]
 
-    # Loop through the list. Create the wall, add it to the list
+    # Teeb seinad
     for item in walls:
         wall = Wall(item[0], item[1], item[2], item[3], blue)
         wall_list.add(wall)
         all_sprites_list.add(wall)
-
-    # return our new list
     return wall_list
 
- #
+
+# lisab otsijate alguse kasti värava
 def setupGate(all_sprites_list):
     gate = pygame.sprite.RenderPlain()
     gate.add(Wall(282, 242, 42, 2, white))
@@ -96,53 +85,32 @@ def setupGate(all_sprites_list):
     return gate
 
 
-# This class represents the ball
-# It derives from the "Sprite" class in Pygame
+# punktid, söök
 class Block(pygame.sprite.Sprite):
-
-    # Constructor. Pass in the color of the block, 
-    # and its x and y position
     def __init__(self, color, width, height):
-        # Call the parent class (Sprite) constructor
         pygame.sprite.Sprite.__init__(self)
-
-        # Create an image of the block, and fill it with a color.
-        # This could also be an image loaded from the disk.
         self.image = pygame.Surface([width, height])
         self.image.fill(white)
         self.image.set_colorkey(white)
         pygame.draw.ellipse(self.image, color, [0, 0, width, height])
-
-        # Fetch the rectangle object that has the dimensions of the image
-        # image.
-        # Update the position of this object by setting the values 
-        # of rect.x and rect.y
         self.rect = self.image.get_rect()
 
-    # This class represents the bar at the bottom that the player controls
 
-
+# mängija klass
 class Player(pygame.sprite.Sprite):
-    # Set speed vector
+    # määrab kiiruse
     change_x = 0
     change_y = 0
-
-    # Constructor function
     def __init__(self, x, y, filename):
-        # Call the parent's constructor
         pygame.sprite.Sprite.__init__(self)
-        # Set height, width
         self.image = pygame.image.load(filename).convert()
-
-
-
-        # Make our top-left corner the passed-in location.
         self.rect = self.image.get_rect()
         self.rect.top = y
         self.rect.left = x
         self.prev_x = x
         self.prev_y = y
-    #
+
+    # pacmani pööramine
     def updateimg(self, degrees):
         img = pygame.image.load("images/pacman.png")
         self.image = pygame.transform.rotate(img, degrees)
@@ -157,47 +125,25 @@ class Player(pygame.sprite.Sprite):
         self.change_x += x
         self.change_y += y
 
-    # Find a new position for the player
+    # uuendab asukohta
     def update(self, walls, gate):
-        # Get the old position, in case we need to go back to it
-
         old_x = self.rect.left
         new_x = old_x + self.change_x
         prev_x = old_x + self.prev_x
         self.rect.left = new_x
-
         old_y = self.rect.top
         new_y = old_y + self.change_y
         prev_y = old_y + self.prev_y
-
-        # Did this update cause us to hit a wall?
         x_collide = pygame.sprite.spritecollide(self, walls, False)
         if x_collide:
-            # Whoops, hit a wall. Go back to the old position
             self.rect.left = old_x
-            # self.rect.top=prev_y
-            # y_collide = pygame.sprite.spritecollide(self, walls, False)
-            # if y_collide:
-            #     # Whoops, hit a wall. Go back to the old position
-            #     self.rect.top=old_y
-            #     print('a')
         else:
-
             self.rect.top = new_y
-
-            # Did this update cause us to hit a wall?
             y_collide = pygame.sprite.spritecollide(self, walls, False)
             if y_collide:
-                # Whoops, hit a wall. Go back to the old position
                 self.rect.top = old_y
-                # self.rect.left=prev_x
-                # x_collide = pygame.sprite.spritecollide(self, walls, False)
-                # if x_collide:
-                #     # Whoops, hit a wall. Go back to the old position
-                #     self.rect.left=old_x
-                #     print('b')
 
-        if gate != False:
+        if gate != False:  #kui värav on tõene
             gate_hit = pygame.sprite.spritecollide(self, gate, False)
             if gate_hit:
                 self.rect.left = old_x
@@ -206,7 +152,6 @@ class Player(pygame.sprite.Sprite):
 
 # Inheritime Player klassist
 class Ghost(Player):
-    # Change the speed of the ghost
     def changespeed(self, list, ghost, turn, steps, l):
         try:
             z = list[turn][2]
@@ -228,7 +173,8 @@ class Ghost(Player):
         except IndexError:
             return [0, 0]
 
-#kuhu otsija liigub
+
+# kuhu otsija liigub
 Pinky_directions = [
     [0, -30, 4],
     [15, 0, 9],
@@ -249,7 +195,7 @@ Pinky_directions = [
     [0, -15, 11],
     [15, 0, 9]
 ]
-#kuhu otsija liigub
+# kuhu otsija liigub
 Blinky_directions = [
     [0, -15, 4],
     [15, 0, 9],
@@ -280,7 +226,7 @@ Blinky_directions = [
     [0, -15, 7],
     [15, 0, 5]
 ]
-#kuhu otsija liigub
+# kuhu otsija liigub
 Inky_directions = [
     [30, 0, 2],
     [0, -15, 4],
@@ -314,7 +260,7 @@ Inky_directions = [
     [0, 15, 3],
     [15, 0, 1],
 ]
-#kuhu otsija liigub
+# kuhu otsija liigub
 Clyde_directions = [
     [-30, 0, 2],
     [0, -15, 4],
@@ -334,49 +280,44 @@ Clyde_directions = [
     [0, -15, 11],
     [15, 0, 9],
 ]
-#
+#otsijate liikumise suund
 pl = len(Pinky_directions) - 1
 bl = len(Blinky_directions) - 1
 il = len(Inky_directions) - 1
 cl = len(Clyde_directions) - 1
 
-#initsialiseerimine
+# initsialiseerimine
 pygame.init()
 
 # Teeb 606x606 suuruse ekraani
 screen = pygame.display.set_mode([606, 606])
 
-# This is a list of 'sprites.' Each block in the program is
-# added to this list. The list is managed by a class called 'RenderPlain.'
-
-
 # Lisab  mängu kasti üles vasakusse äärde "Pacman"
 pygame.display.set_caption('Pacman')
 
-# Create a surface we can draw on
+# Teeb ekraani
 background = pygame.Surface(screen.get_size())
-
-# Used for converting color maps and such
 background = background.convert()
-
 # Värvib tausta mustaks
 background.fill(black)
-#
+#fpsi jaoks
 clock = pygame.time.Clock()
-#Font
+
+# Font
 pygame.font.init()
 font = pygame.font.Font("freesansbold.ttf", 24)
 
 # Alguse asukohad pacmanile ja otsijatele
 w = 303 - 16  # Laius
-p_h = (7 * 60) + 19  # Pacmani pikkus
-m_h = (4 * 60) + 19  # otsija pikkus
-b_h = (3 * 60) + 19  # otsija pikkus
-i_w = 303 - 16 - 32  # otsija pikkus
-c_w = 303 + (32 - 16)  # otsija pikkus
+p_h = (7 * 60) + 19  # Pacmani Suurus
+m_h = (4 * 60) + 19  # otsija Suurus
+b_h = (3 * 60) + 19  # otsija Suurus
+i_w = 303 - 16 - 32  # otsija Suurus
+c_w = 303 + (32 - 16)  # otsija Suurus
 
 
-def startGame(): #
+def startGame():  # mängu põhi funktsioon
+    # seab vajalikud muutujad
     all_sprites_list = pygame.sprite.RenderPlain()
 
     block_list = pygame.sprite.RenderPlain()
@@ -405,32 +346,30 @@ def startGame(): #
     Pacman = Player(w, p_h, "images/pacman.png")
     all_sprites_list.add(Pacman)
     pacman_collide.add(Pacman)
-    #üks otsijatest
+    # üks otsijatest
     Blinky = Ghost(w, b_h, "images/ual.png")
     monsta_list.add(Blinky)
     all_sprites_list.add(Blinky)
-    #üks otsijatest
+    # üks otsijatest
     Pinky = Ghost(w, m_h, "images/cartman.png")
     monsta_list.add(Pinky)
     all_sprites_list.add(Pinky)
-    #üks otsijatest
+    # üks otsijatest
     Inky = Ghost(i_w, m_h, "images/marke.png")
     monsta_list.add(Inky)
     all_sprites_list.add(Inky)
-    #üks otsijatest
+    # üks otsijatest
     Clyde = Ghost(c_w, m_h, "images/bjorn.png")
     monsta_list.add(Clyde)
     all_sprites_list.add(Clyde)
 
-    # Draw the grid
+    # joonistab kõik söögi
     for row in range(19):
         for column in range(19):
             if (row == 7 or row == 8) and (column == 8 or column == 9 or column == 10):
                 continue
             else:
                 block = Block(yellow, 4, 4)
-
-                # Set a random location for the block
                 block.rect.x = (30 * column + 6) + 26
                 block.rect.y = (30 * row + 6) + 26
 
@@ -441,7 +380,7 @@ def startGame(): #
                 elif p_collide:
                     continue
                 else:
-                    # Add the block to the list of objects
+                    # Lisab söögi kõikide asjade listi
                     block_list.add(block)
                     all_sprites_list.add(block)
 
@@ -458,23 +397,23 @@ def startGame(): #
             if event.type == pygame.QUIT:
                 done = True
 
-            if event.type == pygame.KEYDOWN: #Mängija liikumine
-                if event.key == pygame.K_LEFT: #liigub vasakule
-                    Pacman.changespeed(-30, 0) #seab positsiooni x-30 pixlit
+            if event.type == pygame.KEYDOWN:  # Mängija liikumine
+                if event.key == pygame.K_LEFT:  # liigub vasakule
+                    Pacman.changespeed(-30, 0)  # seab positsiooni x-30 pixlit
                     Pacman.updateimg(180)
-                if event.key == pygame.K_RIGHT: #liigub vasakule
-                    Pacman.changespeed(30, 0) #seab positsiooni y30 pixlit
+                if event.key == pygame.K_RIGHT:  # liigub vasakule
+                    Pacman.changespeed(30, 0)  # seab positsiooni y30 pixlit
                     Pacman.updateimg(0)
-                if event.key == pygame.K_UP: #liigub üles
+                if event.key == pygame.K_UP:  # liigub üles
                     Pacman.changespeed(0, -30)
                     Pacman.updateimg(90)
-                if event.key == pygame.K_DOWN: #liigub alla
+                if event.key == pygame.K_DOWN:  # liigub alla
                     Pacman.changespeed(0, 30)
                     Pacman.updateimg(-90)
 
-                if event.key == pygame.K_a: #cheat
+                if event.key == pygame.K_a:  # cheat
                     Pacman.changespeed(-60, 0)
-                    Pacman.updateimg(180) #cheat
+                    Pacman.updateimg(180)  # cheat
                 if event.key == pygame.K_d:
                     Pacman.changespeed(60, 0)
                     Pacman.updateimg(0)
@@ -485,6 +424,7 @@ def startGame(): #
                     Pacman.changespeed(0, 60)
                     Pacman.updateimg(-90)
 
+            # et pacman lõpmatuseni ei liiguks
             if event.type == pygame.KEYUP:  #
                 if event.key == pygame.K_LEFT:
                     Pacman.changespeed(30, 0)
@@ -503,10 +443,11 @@ def startGame(): #
                     Pacman.changespeed(0, 60)
                 if event.key == pygame.K_s:
                     Pacman.changespeed(0, -60)
+                #
 
-        # ALL EVENT PROCESSING SHOULD GO ABOVE THIS COMMENT
+        # KÕIK EVENDID LÄHEVAD SELLE REA ÜLES
 
-        # ALL GAME LOGIC SHOULD GO BELOW THIS COMMENT
+        # KÕIK MÄNGU LOOGIKA LÄHEB SELLE REA ALLA
         Pacman.update(wall_list, gate)
 
         returned = Pinky.changespeed(Pinky_directions, False, p_turn, p_steps, pl)
@@ -533,45 +474,46 @@ def startGame(): #
         Clyde.changespeed(Clyde_directions, "clyde", c_turn, c_steps, cl)
         Clyde.update(wall_list, False)
 
-        # See if the Pacman block has collided with anything.
+        # Kui pacman on millegiga kokku puutunud
         blocks_hit_list = pygame.sprite.spritecollide(Pacman, block_list, True)
 
-        # Check the list of collisions.
+        # kui pacman sööb täpi ära skoor läheb üles
         if len(blocks_hit_list) > 0:
             score += len(blocks_hit_list)
 
-        # ALL GAME LOGIC SHOULD GO ABOVE THIS COMMENT
+        # KÕIK MÄNGU LOOGIKA LÄHEB SELLE REA ÜLES
 
-        # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
+        # KÕIK JOONISTAMINE LÄHEB SELLE REA ALLA
         screen.fill(black)
-        #Joonistab tausta
+        # Joonistab tausta
         wall_list.draw(screen)
         gate.draw(screen)
         all_sprites_list.draw(screen)
         monsta_list.draw(screen)
-        #skoor
+        # skoor
         text = font.render("Score: " + str(score) + "/" + str(bll), True, red)
         screen.blit(text, [10, 10])
-        #Kui koik pallid on korjatud tuleb kiri "You WOn"
+        # Kui koik pallid on korjatud tuleb kiri "You WOn"
         if score == bll:
             doNext("Congratulations, you won!", 145, all_sprites_list, block_list, monsta_list, pacman_collide,
                    wall_list, gate)
-        #kui pacman läheb tagaotsjatele pihta
+        # kui pacman läheb tagaotsjatele pihta
         monsta_hit_list = pygame.sprite.spritecollide(Pacman, monsta_list, False)
         # kui pacman läheb tagaotsjatele pihta
         if monsta_hit_list:
             doNext("Game Over", 235, all_sprites_list, block_list, monsta_list, pacman_collide, wall_list, gate)
 
-        # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-        #uuendab ekraani
+        # KÕIK JOONISTAMINE LÄHEB SELLE REA ÜLES
+        # uuendab ekraani
         pygame.display.flip()
-        #fps
+        # fps
         clock.tick(10)
+
 
 #
 def doNext(message, left, all_sprites_list, block_list, monsta_list, pacman_collide, wall_list, gate):
     while True:
-        # ALL EVENT PROCESSING SHOULD GO BELOW THIS COMMENT
+        # KÕIK EVENDID LÄHEVAD SELLE REA ALLA
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -587,23 +529,23 @@ def doNext(message, left, all_sprites_list, block_list, monsta_list, pacman_coll
                     del gate
                     startGame()
 
-        # Grey background
-        w = pygame.Surface((400, 200))  # the size of your rect
-        w.set_alpha(10)  # alpha level
-        w.fill((128, 128, 128))  # this fills the entire surface
-        screen.blit(w, (100, 200))  # (0,0) are the top-left coordinates
+        # Hall taust
+        w = pygame.Surface((400, 200))  # Ekraani suurus
+        w.set_alpha(10)  # Läbipaistvus
+        w.fill((128, 128, 128))  # Täidab ekraani halliga
+        screen.blit(w, (100, 200))  # Ekraani asukoht kus joonistab
 
-        # Won or lost
+        # Võitis või kaotas
         text1 = font.render(message, True, white)
         screen.blit(text1, [left, 233])
-        #kui saad surma tuleb text kas "Vajutada enter ja mangida uuesti" või "vajutada ESC ja panna mäng kinni"
+        # kui saad surma tuleb text kas "Vajutada enter ja mangida uuesti" või "vajutada ESC ja panna mäng kinni"
         text2 = font.render("To play again, press ENTER.", True, white)
         screen.blit(text2, [135, 303])
         text3 = font.render("To quit, press ESCAPE.", True, white)
         screen.blit(text3, [165, 333])
-        #uuendab ekraani
+        # uuendab ekraani
         pygame.display.flip()
-        #fps
+        # fps
         clock.tick(10)
 
 
