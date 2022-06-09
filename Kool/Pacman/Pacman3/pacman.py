@@ -130,11 +130,11 @@ class Player(pygame.sprite.Sprite):
     def update(self, walls, gate):
         old_x = self.rect.left
         new_x = old_x + self.change_x
-        prev_x = old_x + self.prev_x
+
         self.rect.left = new_x
         old_y = self.rect.top
         new_y = old_y + self.change_y
-        prev_y = old_y + self.prev_y
+
         x_collide = pygame.sprite.spritecollide(self, walls, False)
         if x_collide:
             self.rect.left = old_x
@@ -153,22 +153,22 @@ class Player(pygame.sprite.Sprite):
 
 # Inheritime Player klassist
 class Ghost(Player):
-    def changespeed(self, list, ghost, turn, steps, l):
+    def changespeed(self, listt, ghost, turn, steps, le):
         try:
-            z = list[turn][2]
+            z = listt[turn][2]
             if steps < z:
-                self.change_x = list[turn][0]
-                self.change_y = list[turn][1]
+                self.change_x = listt[turn][0]
+                self.change_y = listt[turn][1]
                 steps += 1
             else:
-                if turn < l:
+                if turn < le:
                     turn += 1
                 elif ghost == "clyde":
                     turn = 2
                 else:
                     turn = 0
-                self.change_x = list[turn][0]
-                self.change_y = list[turn][1]
+                self.change_x = listt[turn][0]
+                self.change_y = listt[turn][1]
                 steps = 0
             return [turn, steps]
         except IndexError:
@@ -391,9 +391,7 @@ def startGame():  # mängu põhi funktsioon
 
     done = False
 
-    i = 0
-
-    while done == False:
+    while not done:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 done = True
@@ -531,10 +529,10 @@ def doNext(message, left, all_sprites_list, block_list, monsta_list, pacman_coll
                     startGame()
 
         # Hall taust
-        w = pygame.Surface((400, 200))  # Ekraani suurus
-        w.set_alpha(10)  # Läbipaistvus
-        w.fill((128, 128, 128))  # Täidab ekraani halliga
-        screen.blit(w, (100, 200))  # Ekraani asukoht kus joonistab
+        win = pygame.Surface((400, 200))  # Ekraani suurus
+        win.set_alpha(10)  # Läbipaistvus
+        win.fill((128, 128, 128))  # Täidab ekraani halliga
+        screen.blit(win, (100, 200))  # Ekraani asukoht kus joonistab
 
         # Võitis või kaotas
         text1 = font.render(message, True, white)
