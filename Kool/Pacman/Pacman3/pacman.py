@@ -1,6 +1,4 @@
-# Pacman in Python with PyGame
-# https://github.com/hbokmann/Pacman
-
+# importib Pygame
 import pygame
 
 black = (0, 0, 0)
@@ -15,10 +13,10 @@ Trollicon = pygame.image.load('images/pacman.png')
 pygame.display.set_icon(Trollicon)
 
 
-# Add music
+# Lisab muusika
 
 
-# This class represents the bar at the bottom that the player controls
+# Seina klass
 class Wall(pygame.sprite.Sprite):
     # Constructor function
     def __init__(self, x, y, width, height, color):
@@ -124,57 +122,6 @@ class Block(pygame.sprite.Sprite):
     # This class represents the bar at the bottom that the player controls
 
 
-class Animation(object):
-    def __init__(self, img, width, height):
-        # Load the sprite sheet
-        self.sprite_sheet = img
-        # Create a list to store the images
-        self.image_list = []
-        self.load_images(width, height)
-        # Create a variable which will hold the current image of the list
-        self.index = 0
-        # Create a variable that will hold the time
-        self.clock = 1
-
-    def load_images(self, width, height):
-        # Go through every single image in the sprite sheet
-        for y in range(0, self.sprite_sheet.get_height(), height):
-            for x in range(0, self.sprite_sheet.get_width(), width):
-                # load images into a list
-                img = self.get_image(x, y, width, height)
-                self.image_list.append(img)
-
-    def get_image(self, x, y, width, height):
-        # Create a new blank image
-        image = pygame.Surface([width, height]).convert()
-        # Copy the sprite from the large sheet onto the smaller
-        image.blit(self.sprite_sheet, (0, 0), (x, y, width, height))
-        # Assuming black works as the transparent color
-        image.set_colorkey((0, 0, 0))
-        # Return the image
-        return image
-
-    def get_current_image(self):
-        return self.image_list[self.index]
-
-    def get_length(self):
-        return len(self.image_list)
-
-    def update(self, fps=30):
-        step = 30 // fps
-        l = range(1, 30, step)
-        if self.clock == 30:
-            self.clock = 1
-        else:
-            self.clock += 1
-
-        if self.clock in l:
-            # Increase index
-            self.index += 1
-            if self.index == len(self.image_list):
-                self.index = 0
-
-
 class Player(pygame.sprite.Sprite):
     # Set speed vector
     change_x = 0
@@ -187,8 +134,7 @@ class Player(pygame.sprite.Sprite):
         # Set height, width
         self.image = pygame.image.load(filename).convert()
 
-        img = pygame.image.load("images/explosion.png").convert()
-        self.explosion_animation = Animation(img, 30, 30)
+
 
         # Make our top-left corner the passed-in location.
         self.rect = self.image.get_rect()
@@ -256,12 +202,6 @@ class Player(pygame.sprite.Sprite):
             if gate_hit:
                 self.rect.left = old_x
                 self.rect.top = old_y
-
-    def explode(self):
-        if self.explosion_animation.index == self.explosion_animation.get_length() - 1:
-            pygame.time.wait(500)
-        self.explosion_animation.update(12)
-        self.image = self.explosion_animation.get_current_image()
 
 
 # Inheritime Player klassist
@@ -605,32 +545,31 @@ def startGame():
 
         # ALL CODE TO DRAW SHOULD GO BELOW THIS COMMENT
         screen.fill(black)
-
+        #Joonistab tausta
         wall_list.draw(screen)
         gate.draw(screen)
         all_sprites_list.draw(screen)
         monsta_list.draw(screen)
-
+        #skoor
         text = font.render("Score: " + str(score) + "/" + str(bll), True, red)
         screen.blit(text, [10, 10])
-
+        #Kui koik pallid on korjatud tuleb kiri "You WOn"
         if score == bll:
             doNext("Congratulations, you won!", 145, all_sprites_list, block_list, monsta_list, pacman_collide,
                    wall_list, gate)
-
+        #kui pacman läheb tagaotsjatele pihta
         monsta_hit_list = pygame.sprite.spritecollide(Pacman, monsta_list, False)
-
+        # kui pacman läheb tagaotsjatele pihta
         if monsta_hit_list:
-            Pacman.explode()
             doNext("Game Over", 235, all_sprites_list, block_list, monsta_list, pacman_collide, wall_list, gate)
 
         # ALL CODE TO DRAW SHOULD GO ABOVE THIS COMMENT
-
+        #uuendab ekraani
         pygame.display.flip()
-
+        #fps
         clock.tick(10)
 
-
+#
 def doNext(message, left, all_sprites_list, block_list, monsta_list, pacman_collide, wall_list, gate):
     while True:
         # ALL EVENT PROCESSING SHOULD GO BELOW THIS COMMENT
