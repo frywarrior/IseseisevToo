@@ -1,4 +1,5 @@
 import pygame
+from itertools import cycle
 
 pygame.init()
 
@@ -8,6 +9,17 @@ white = (255, 255, 255)
 gray = (230, 230, 230)
 dgray = (200, 200, 200)
 ddgray = (150, 150, 150)
+
+degs = cycle(list(range(361)))
+Scythe = pygame.transform.scale(pygame.image.load("Img/Scythe.png"), (60, 56))
+
+
+def blitRotateCenter(surf, image, topleft, angle):
+    rotated_image = pygame.transform.rotate(image, angle)
+    new_rect = rotated_image.get_rect(center=image.get_rect(topleft=topleft).center)
+
+    surf.blit(rotated_image, new_rect)
+
 
 boxX, boxY = 40, 120
 boxspeedY = 0
@@ -32,28 +44,32 @@ while not gameover:
 
     # platform
     platformRect = pygame.rect.Rect(15, 360, 610, 10)
-    pygame.draw.rect(screen, gray, platformRect, 0, 5,)
+    pygame.draw.rect(screen, gray, platformRect, 0, 5, )
     pygame.draw.rect(screen, dgray, platformRect, 1, 5)
 
     #
 
+    blitRotateCenter(screen, Scythe, (100, 100), -next(degs))
+    """
+    screen.blit(scytherot(-next(degs)), (100, 100))
+    """
     # box XD
     boxRect = pygame.rect.Rect(boxX, boxY, 40, 40)
-    boxNFRect = pygame.Rect(boxRect[0],boxRect[1] + boxspeedY, boxRect[2], boxRect[3]) # box rect next frame
+    boxNFRect = pygame.Rect(boxRect[0], boxRect[1] + boxspeedY, boxRect[2], boxRect[3])  # box rect next frame
     box = pygame.draw.rect(screen, ddgray, boxRect, 0, 6)
 
     if boxNFRect.colliderect(platformRect):
-        boxY = platformRect[1] -39
+        boxY = platformRect[1] - 39
         boxspeedY = 0
     else:
-        boxspeedY += GRAVITY/FPS
+        boxspeedY += GRAVITY / FPS
         boxY += boxspeedY
 
     if boxRect[1] > 640:
         boxX, boxY = 300, -80
 
     #
-    
+
     #
     events = pygame.event.get()
 
