@@ -1,4 +1,5 @@
 import pygame
+import random as rd
 
 pygame.init()
 
@@ -48,6 +49,9 @@ while not gameover:
     else:
         boxspeedY += GRAVITY/FPS
         boxY += boxspeedY
+
+    if boxRect[1] > 640:
+        boxX, boxY = rd.randrange(15, 571, 1), -80
 
     #
     
