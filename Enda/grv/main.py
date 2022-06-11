@@ -1,5 +1,4 @@
 import pygame
-from itertools import cycle
 
 pygame.init()
 
@@ -10,7 +9,8 @@ gray = (230, 230, 230)
 dgray = (200, 200, 200)
 ddgray = (150, 150, 150)
 
-degs = cycle(list(range(361)))
+scind = 0
+ofset = pygame.math.Vector2(28, -26)
 Scythe = pygame.transform.scale(pygame.image.load("Img/Scythe.png"), (60, 56))
 
 
@@ -19,6 +19,22 @@ def blitRotateCenter(surf, image, topleft, angle):
     new_rect = rotated_image.get_rect(center=image.get_rect(topleft=topleft).center)
 
     surf.blit(rotated_image, new_rect)
+
+
+def rotate(surface, angle, pivot, offset):
+    """Rotate the surface around the pivot point.
+
+    Args:
+        surface (pygame.Surface): The surface that is to be rotated.
+        angle (float): Rotate by this angle.
+        pivot (tuple, list, pygame.math.Vector2): The pivot point.
+        offset (pygame.math.Vector2): This vector is added to the pivot.
+    """
+    rotated_image = pygame.transform.rotozoom(surface, -angle, 1)  # Rotate the image.
+    rotated_offset = offset.rotate(angle)  # Rotate the offset vector.
+    # Add the offset vector to the center/pivot point to shift the rect.
+    rect = rotated_image.get_rect(center=pivot+rotated_offset)
+    return rotated_image, rect  # Return the rotated image and shifted rect.
 
 
 boxX, boxY = 40, 120
@@ -42,6 +58,11 @@ while not gameover:
 
     screen.fill(white)
 
+    #
+    screen.blit(pygame.font.Font(None, 30).render(f"FPS: {round(clock.get_fps(), 1)}", True, [0, 0, 0]), [10, 10])
+
+    #
+
     # platform
     platformRect = pygame.rect.Rect(15, 360, 610, 10)
     pygame.draw.rect(screen, gray, platformRect, 0, 5, )
@@ -49,7 +70,15 @@ while not gameover:
 
     #
 
-    blitRotateCenter(screen, Scythe, (100, 100), -next(degs))
+    # blitRotateCenter(screen, Scythe, (100, 100), scind)
+
+
+    screen.blit(rotate(Scythe, scind, (100, 156), ofset)[0], rotate(Scythe, scind, (100, 156), ofset)[1])
+
+    scind += 10
+    if scind >= 360:
+        scind -= 360
+
     """
     screen.blit(scytherot(-next(degs)), (100, 100))
     """
