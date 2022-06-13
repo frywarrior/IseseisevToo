@@ -84,8 +84,11 @@ while not gameover:
     """
     # box XD
     boxRect = pygame.rect.Rect(boxX, boxY, 40, 40)
+    boxInnerRect = pygame.rect.Rect(boxRect[0]+2, boxRect[1]+2, boxRect[2]-4, boxRect[3]-4)
     boxNFRect = pygame.Rect(boxRect[0], boxRect[1] + boxspeedY, boxRect[2], boxRect[3])  # box rect next frame
+
     box = pygame.draw.rect(screen, ddgray, boxRect, 0, 6)
+    boxinner = pygame.draw.rect(screen, dgray, boxInnerRect, 0, 6)
 
     if boxNFRect.colliderect(platformRect):
         boxY = platformRect[1] - 39
