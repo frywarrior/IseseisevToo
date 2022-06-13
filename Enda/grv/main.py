@@ -107,7 +107,7 @@ while not gameover:
         if i.type == pygame.QUIT:
             quit()
         if i.type == pygame.KEYDOWN:
-            if i.key == pygame.K_UP:
+            if i.key == pygame.K_UP and boxspeedY == 0:
                 boxY -= 1
                 boxspeedY = -6
             if i.key != pygame.K_UP:
