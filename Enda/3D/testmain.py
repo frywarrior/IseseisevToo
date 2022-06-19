@@ -438,7 +438,7 @@ def get_slopes(num_start, num_middle, num_stop, den_start, den_middle, den_stop)
 
 
 @njit()
-def filter_triangles(z_min, normal, CameraRay, xxs, yys, scale=1):  # TODO replace filtering with proper clipping
+def filter_triangles(z_min, normal, CameraRay, xxs, yys, scale=1):
     # only points on +z, facing the camera, check triangle bounding box
     if z_min > 0 and dot_product(normal, CameraRay) < 0 and max(xxs) >= 0 and min(xxs) < SCREEN_W * scale and max(
             yys) >= 0 and min(yys) < SCREEN_H * scale:
