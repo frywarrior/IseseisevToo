@@ -33,7 +33,8 @@ def main():
         for index in range(len(triangles)):
             triangle = [points[triangles[index][0]][3:], points[triangles[index][1]][3:],
                         points[triangles[index][2]][3:]]
-            color = [255, 255, 0]
+            color = np.abs(points[triangles[index][0]][:3])*45 + 25
+
             pg.draw.polygon(surf, color, triangle)
 
         screen.blit(surf, (0, 0))
@@ -53,7 +54,8 @@ def project_points(points, camera):
         h_angle = (h_angle_camera_point - camera[3]) % (2 * np.pi)
 
         # Bring to -pi to pi range
-        if h_angle > np.pi: h_angle = h_angle - 2 * np.pi
+        if h_angle > np.pi:
+            h_angle = h_angle - 2 * np.pi
 
         # Calculate the point horizontal screen coordinate
         point[3] = SCREEN_W * h_angle / FOV_H + SCREEN_W / 2
@@ -68,7 +70,8 @@ def project_points(points, camera):
         v_angle = (v_angle_camera_point - camera[4]) % (2 * np.pi)
 
         # Bring to -pi to pi range
-        if v_angle > np.pi: v_angle = v_angle - 2 * np.pi
+        if v_angle > np.pi:
+            v_angle = v_angle - 2 * np.pi
 
         # Calculate the point vertical screen coordinate
         point[4] = SCREEN_H * v_angle / FOV_V + SCREEN_H / 2
@@ -80,15 +83,15 @@ def read_obj(filename):
     f = open(filename)
     for line in f:
         if line[:2] == "v ":
-            index1 = line.find("") + 1
-            index2 = line.find("", index1 + 1)
-            index3 = line.find("", index2 + 1)
+            index1 = line.find(" ") + 1
+            index2 = line.find(" ", index1 + 1)
+            index3 = line.find(" ", index2 + 1)
             vertex = [float(line[index1:index2]), float(line[index2:index3]), float(line[index3:-1]), 1, 1]
             vertices.append(vertex)
         elif line[0] == "f":
-            index1 = line.find("") + 1
-            index2 = line.find("", index1 + 1)
-            index3 = line.find("", index2 + 1)
+            index1 = line.find(" ") + 1
+            index2 = line.find(" ", index1 + 1)
+            index3 = line.find(" ", index2 + 1)
             triangles.append([int(line[index1:index2]) - 1, int(line[index2:index3]) - 1, int(line[index3:-1]) - 1])
     f.close()
     return np.asarray(vertices), np.asarray(triangles)
