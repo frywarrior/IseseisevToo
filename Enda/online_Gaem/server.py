@@ -2,7 +2,7 @@ import socket
 from _thread import *
 import sys
 
-server = ""
+server = "10.43.143.175"
 port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -13,7 +13,7 @@ except socket.error as e:
     str(e)
 
 s.listen(2)
-print("Waiting for connection, Server starter")
+print("Waiting for connection, Server started")
 
 def threaded_client(conn):
 
