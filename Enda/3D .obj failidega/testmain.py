@@ -33,9 +33,6 @@ def main():
     model3 = Model('obj models/finfet.obj', '')
     model3.change_position(-10, 20, -10)
 
-    model4 = Model('obj models/cube text.obj', 'finfet.png')
-    model4.change_position(y=20)
-
     model5 = Model('obj models/Babycrocodile.obj', 'obj models/BabyCrocodileGreen.png')
     model5.change_position(5, 0.5, 30)
 
@@ -55,9 +52,8 @@ def main():
         pg.mouse.set_pos(SCREEN_W / 2, SCREEN_H / 2)
         elapsed_time = clock.tick() * 0.001
 
-        # model3.change_position(camera[0]+ 10*np.cos(camera[3]), camera[1], camera[2] + 10*np.sin(camera[3]), reset=1)
         # model3.change_position(light_camera[0], light_camera[1], light_camera[2], scale = 10000, reset=1)
-        model4.change_position(rotx=elapsed_time * .1, roty=elapsed_time * .2, rotz=elapsed_time * .5)
+
         model5.change_position(roty=elapsed_time * .7)
 
         light_camera[0] = light_camera[1] * np.sin(pg.time.get_ticks() / 4500)
