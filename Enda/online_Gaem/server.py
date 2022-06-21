@@ -13,7 +13,7 @@ except socket.error as e:
     str(e)
 
 s.listen(2)
-print("Waiting for connection, Server started")
+print("Waiting for a connection, Server Started")
 
 
 def read_pos(str):
@@ -36,24 +36,22 @@ def threaded_client(conn, player):
             data = read_pos(conn.recv(2048).decode())
             pos[player] = data
 
-
             if not data:
                 print("Disconnected")
                 break
             else:
-
                 if player == 1:
                     reply = pos[0]
                 else:
                     reply = pos[1]
 
-                print(f"Received: {data}")
-                print(f"Sending: {reply}")
+                print("Received: ", data)
+                print("Sending : ", reply)
 
             conn.sendall(str.encode(make_pos(reply)))
-
         except:
             break
+
     print("Lost connection")
     conn.close()
 
@@ -61,7 +59,7 @@ def threaded_client(conn, player):
 currentPlayer = 0
 while True:
     conn, addr = s.accept()
-    print(f"connected to : {addr}")
+    print("Connected to:", addr)
 
     start_new_thread(threaded_client, (conn, currentPlayer))
     currentPlayer += 1
