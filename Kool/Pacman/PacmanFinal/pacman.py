@@ -348,8 +348,10 @@ def startGame():  # mängu põhi funktsioon
 
     pygame.mixer.music.set_volume(0.2)
 
+    """
     pygame.mixer.music.load('images/kann.mp3')
     pygame.mixer.music.play(-1)
+    """
 
     # Mängija pacmani kujutis
     Pacman = Player(w, p_h, "images/pacman.png")
