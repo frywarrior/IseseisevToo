@@ -2,7 +2,7 @@ import socket
 from _thread import *
 import sys
 
-server = "10.43.143.175"
+server = "10.35.140.130"
 port = 5555
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
@@ -45,8 +45,8 @@ def threaded_client(conn, player):
                 else:
                     reply = pos[1]
 
-                print("Received: ", data)
-                print("Sending : ", reply)
+                # print("Received: ", data)
+                # print("Sending : ", reply)
 
             conn.sendall(str.encode(make_pos(reply)))
         except:
@@ -63,3 +63,5 @@ while True:
 
     start_new_thread(threaded_client, (conn, currentPlayer))
     currentPlayer += 1
+
+
