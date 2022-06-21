@@ -2,15 +2,12 @@ import socket
 from _thread import *
 import sys
 
-server = "10.35.140.130"
-port = 5555
+server = "0.0.0.0"
+port = 10002
 
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-
-try:
-    s.bind((server, port))
-except socket.error as e:
-    str(e)
+# listen on all interfaces
+s.bind((server, port))
 
 s.listen(2)
 print("Waiting for a connection, Server Started")
