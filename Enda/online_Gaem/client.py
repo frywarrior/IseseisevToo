@@ -71,9 +71,9 @@ def main():
 
         clock.tick(60)
 
-        p2Pos = read_pos(n.send(make_pos((p.x, p.y))))
-        p2.x = p2Pos[0]
-        p2.y = p2Pos[1]
+        p2pos = read_pos(n.send(make_pos((p.x, p.y))))
+        p2.x = p2pos[0]
+        p2.y = p2pos[1]
         p2.update()
 
         for event in pygame.event.get():
