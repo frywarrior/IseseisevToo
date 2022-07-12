@@ -1,14 +1,17 @@
-from bs4 import BeautifulSoup
-from urllib.request import urlopen
+def getimg():
+    from bs4 import BeautifulSoup
+    from urllib.request import urlopen, urlretrieve
 
-url = "https://www.ilmateenistus.ee/wp-content/themes/emhi2013/data/radar/cappi_rain/?C=M;O=D"
-print(url[:-8])
-html = urlopen(url).read()
+    url = "https://vana.ilmateenistus.ee/wp-content/themes/emhi2013/data/radar/cappi_rain/?C=M;O=D"
 
-soup = BeautifulSoup(html, features="html.parser")
+    html = urlopen(url).read()
 
-last_link = soup.find_all('a', href=True)[5]
+    soup = BeautifulSoup(html, features="html.parser")
 
-latest_content = urlopen(f"{url[:-8]}{last_link['href']}").read()
+    last_link = soup.find_all('a', href=True)[5]
 
-print(last_link['href'])
+    urlretrieve(f"{url[:-8]}{last_link['href']}", "static/img.png")
+
+    print(last_link['href'])
+
+    print(f"{url[:-8]}{last_link['href']}")

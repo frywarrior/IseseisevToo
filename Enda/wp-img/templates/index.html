@@ -1,9 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script language="JavaScript">
+            function refreshIt(element) {
+                setTimeout(function() {
+                    element.src = element.src.split('?')[0] + '?' + new Date().getTime();
+                    refreshIt(element);
+                }, 300000); // refresh every 5000ms
+            }
+    </script>
     <title>Wp-index-img</title>
+    <style>
+  .center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+    </style>
 </head>
 <body>
-   <h1>Bot is running</h1>
+    <img src="{{url_for('static', filename='img.png')}}" alt="img" class="center" onload="refreshIt(this)">
+    
+    <iframe src="{{url_for('static', filename='img.png')}}" width="100%" height="300" style="border:none;" class="center" onload="refreshIt(this)">
+    </iframe>
 </body>
+
 </html>
